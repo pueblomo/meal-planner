@@ -1,8 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm, UseFormRegister } from "react-hook-form";
 import Input from "../../components/input/input";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import { useRouter } from "next/navigation";
+import PocketBase, { ClientResponseError } from "pocketbase";
+import {
+  authenticationIsValid,
+  createUser,
+  login,
+} from "../../services/pocketbase";
 
 type Inputs = {
   email: string;
@@ -25,7 +32,31 @@ const LoginForm = () => {
     resolver: yupResolver(schema),
   });
 
-  const onSubmit = (data: any) => console.log(data);
+  const router = useRouter();
+  const [loginError, setLoginError] = useState<string | undefined>(undefined);
+  const [loginType, setLoginType] = useState(true);
+
+  const onSubmit = async (data: { email: string; password: string }) => {
+    setLoginError(undefined);
+    try {
+      if (loginType) {
+        await login(data.email, data.password);
+      } else {
+        await createUser(data.email, data.password);
+        await login(data.email, data.password);
+      }
+    } catch (e) {
+      if (e instanceof ClientResponseError) {
+        setLoginError(e.message);
+      }
+    }
+
+    if (authenticationIsValid()) {
+      router.push("/");
+    } else {
+      setLoginError("authentication invalid");
+    }
+  };
 
   return (
     <div className="overflow-auto w-full h-2/4 bg-white rounded-t-lg shadow-lg xl:h-full xl:rounded-l-lg xl:rounded-tr-none xl:w-6/12">
@@ -46,7 +77,8 @@ const LoginForm = () => {
             onSubmit={handleSubmit(onSubmit)}
           >
             <p className="text-2xl xl:text-base">
-              Please login to your account
+              {loginType && "Please login to your account"}
+              {!loginType && "Please register your account"}
             </p>
             <div className="w-6/12">
               <Input
@@ -70,13 +102,20 @@ const LoginForm = () => {
               type="submit"
               className="w-6/12 mt-3 text-2xl p-1 xl:text-base leading-tight text-white rounded-lg border bg-gradient-to-r from-[#ee7724] via-[#d8363a] via-[#dd3675] to-[#b44593] uppercase"
             >
-              Login
+              {loginType && "Login"}
+              {!loginType && "Register"}
             </button>
+            <p className="text-red-500">{loginError}</p>
             <button className="mt-5 text-gray-500">Forgot password?</button>
             <div className="flex justify-between items-center mt-10 w-6/12 text-2xl xl:text-base">
-              <p>Don't have an account?</p>
-              <button className="p-2 rounded-lg border-2 text-[#ee7724] border-[#b44593]">
-                Register
+              {loginType && <p>Don't have an account?</p>}
+              {!loginType && <p>Have an account?</p>}
+              <button
+                className="p-2 rounded-lg border-2 text-[#ee7724] border-[#b44593]"
+                onClick={() => setLoginType(!loginType)}
+              >
+                {loginType && "Register"}
+                {!loginType && "Login"}
               </button>
             </div>
           </form>
