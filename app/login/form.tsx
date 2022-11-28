@@ -1,14 +1,31 @@
 import React from "react";
 import { useForm, UseFormRegister } from "react-hook-form";
 import Input from "../../components/input/input";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
 
 type Inputs = {
   email: string;
   password: string;
 };
 
+const schema = yup
+  .object({
+    email: yup.string().required().email(),
+    password: yup.string().required(),
+  })
+  .required();
+
 const LoginForm = () => {
-  const { register, handleSubmit } = useForm<Inputs>();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<Inputs>({
+    resolver: yupResolver(schema),
+  });
+
+  const onSubmit = (data: any) => console.log(data);
 
   return (
     <div className="overflow-auto w-full h-2/4 bg-white rounded-t-lg shadow-lg xl:h-full xl:rounded-l-lg xl:rounded-tr-none xl:w-6/12">
@@ -24,7 +41,10 @@ const LoginForm = () => {
           </h4>
         </div>
         <div className="text-center">
-          <form className="flex flex-col gap-2 items-center">
+          <form
+            className="flex flex-col gap-2 items-center"
+            onSubmit={handleSubmit(onSubmit)}
+          >
             <p className="text-2xl xl:text-base">
               Please login to your account
             </p>
@@ -33,14 +53,18 @@ const LoginForm = () => {
                 placeholder="Email"
                 id="email"
                 name="email"
+                type="email"
                 register={register}
               />
+              <p className="text-red-500">{errors.email?.message}</p>
               <Input
                 placeholder="Password"
                 id="password"
                 name="password"
+                type="password"
                 register={register}
               />
+              <p className="text-red-500">{errors.password?.message}</p>
             </div>
             <button
               type="submit"

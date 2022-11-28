@@ -1,5 +1,5 @@
 import React from "react";
 
 const Register = () => {
-  return;
+  return <p>Hello</p>;
 };
