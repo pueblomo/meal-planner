@@ -1,4 +1,4 @@
-import RouterGuard from "./authGuard";
+import RouterGuard from "./routerGuard";
 import "./globals.css";
 
 export default function RootLayout({
@@ -13,7 +13,7 @@ export default function RootLayout({
         head.tsx. Find out more at https://beta.nextjs.org/docs/api-reference/file-conventions/head
       */}
       <head />
-      <body>
+      <body className="w-screen h-screen bg-gradient-to-b from-slate-300 via-slate-100">
         <RouterGuard>{children}</RouterGuard>
       </body>
     </html>

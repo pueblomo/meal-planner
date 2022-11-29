@@ -52,7 +52,7 @@ const LoginForm = () => {
     }
 
     if (authenticationIsValid()) {
-      router.push("/");
+      router.push("/recipes");
     } else {
       setLoginError("authentication invalid");
     }

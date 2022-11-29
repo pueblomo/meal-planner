@@ -11,7 +11,7 @@ const RouterGuard = ({ children }: { children: React.ReactNode }) => {
 
   useEffect(() => {
     authCheck(pathname);
-  }, []);
+  }, [pathname]);
 
   function authCheck(url: string | null) {
     const publicPaths = ["/login"];
