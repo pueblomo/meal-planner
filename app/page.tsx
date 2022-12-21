@@ -1,22 +1,22 @@
 "use client";
-import { Controller, SubmitHandler, useForm } from "react-hook-form";
-import Button from "../components/button/button";
-import Input from "../components/input/input";
 import LoadingSpinner from "../components/spinner/loading-spinner";
-import authRoute from "./authGuard";
+import React, { FC, useEffect } from "react";
+import { authenticationIsValid } from "../services/pocketbase";
+import { useRouter } from "next/navigation";
 
-type Inputs = {
-  example: string;
-  exampleRequired: string;
-};
+const Home: FC = () => {
+  const router = useRouter();
 
-const Home = () => {
-  const { register, handleSubmit } = useForm<Inputs>();
-
-  const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data);
+  useEffect(() => {
+    if (authenticationIsValid()) {
+      router.push("/recipes");
+    } else {
+      router.push("/login");
+    }
+  }, []);
 
   return (
-    <div>
+    <div className="flex justify-center items-center w-screen h-screen">
       <LoadingSpinner />
     </div>
   );
