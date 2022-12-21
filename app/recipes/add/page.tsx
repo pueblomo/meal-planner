@@ -1,35 +1,30 @@
 "use client";
 import { useRouter } from "next/navigation";
-import React, { useState } from "react";
-import { set, useFieldArray, useForm } from "react-hook-form";
+import React, { FC } from "react";
+import { useFieldArray, useForm } from "react-hook-form";
 
 import Input from "../../../components/input/input";
 import { createRecipe } from "../../../services/pocketbase";
 import AddRecipeHeader from "./header";
 
-export type RecipeFormValues = {
+export interface RecipeFormValues {
   name: string;
   preparation: string;
   picture: string[];
-  ingredients: { name: string; amount: string }[];
-};
+  ingredients: Array<{ name: string; amount: string }>;
+}
 
-const AddRecipe = () => {
-  const {
-    register,
-    handleSubmit,
-    control,
-    formState: { errors },
-  } = useForm<RecipeFormValues>();
+const AddRecipe: FC = () => {
+  const { register, handleSubmit, control } = useForm<RecipeFormValues>();
 
-  const { fields, append, remove } = useFieldArray({
+  const { fields, append } = useFieldArray({
     name: "ingredients",
     control,
   });
 
   const router = useRouter();
 
-  const onSubmit = (data: RecipeFormValues) => {
+  const onSubmit = (data: RecipeFormValues): void => {
     createRecipe(data);
     router.push("/recipes");
   };
@@ -37,10 +32,10 @@ const AddRecipe = () => {
   return (
     <section className="h-screen">
       <AddRecipeHeader />
-      <div className="p-4 w-full h-full">
-        <div className="overflow-auto w-full h-5/6 bg-white rounded-lg shadow-lg">
+      <div className="p-3 w-full h-full pb-16">
+        <div className="overflow-auto w-full h-full bg-white rounded-lg shadow-lg">
           <form
-            className="flex flex-col gap-2 p-4"
+            className="flex flex-col gap-2 p-4 h-full"
             onSubmit={handleSubmit(onSubmit)}
           >
             <Input
@@ -56,7 +51,7 @@ const AddRecipe = () => {
               placeholder="Preparation guide"
               draggable={false}
               rows={10}
-              className="p-1 my-1 w-full text-2xl rounded-md border border-gray-600 transition duration-150 ease-in-out xl:text-base focus:border-[#b44593] focus:outline-none"
+              className="p-1 my-1 w-full xl:text-2xl text-base min-h-[14rem] rounded-md border border-gray-600 transition duration-150 ease-in-out xl:text-base focus:border-[#b44593] focus:outline-none"
             />
             <Input
               id="picture"
@@ -65,10 +60,10 @@ const AddRecipe = () => {
               type="file"
             />
             <div className="flex justify-between items-center">
-              <p>Ingredients:</p>
+              <p className="xl:text-base text-base">Ingredients:</p>
               <button
                 onClick={() => append({ name: "", amount: "" })}
-                className="p-1 font-bold text-2xl text-[#b44593]"
+                className="p-2 font-bold xl:text-2xl text-lg text-[#b44593]"
                 type="button"
               >
                 +
@@ -94,7 +89,7 @@ const AddRecipe = () => {
             })}
             <button
               type="submit"
-              className="w-6/12 mt-3 text-2xl self-center p-1 xl:text-base leading-tight text-white rounded-lg border bg-gradient-to-r from-[#ee7724] via-[#d8363a] via-[#dd3675] to-[#b44593] uppercase"
+              className="w-6/12 my-3 xl:text-2xl text-lg shadow-lg self-center xl:p-1 p-2 xl:text-base leading-tight text-white rounded-lg border bg-gradient-to-r from-[#ee7724] via-[#d8363a] via-[#dd3675] to-[#b44593] uppercase"
             >
               Add
             </button>

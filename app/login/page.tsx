@@ -1,12 +1,12 @@
 "use client";
-import React from "react";
+import React, { FC } from "react";
 import Description from "./description";
 import LoginForm from "./form";
 
-const Login = () => {
+const Login: FC = () => {
   return (
     <section className="h-screen">
-      <div className="px-12 py-16 h-full">
+      <div className="px-3 py-4 h-full">
         <div className="flex flex-wrap justify-center h-full">
           <LoginForm />
           <Description />

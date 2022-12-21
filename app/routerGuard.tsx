@@ -1,10 +1,10 @@
 "use client";
 
-import { useRouter, usePathname } from "next/navigation";
-import React, { useEffect, useState } from "react";
-import { authenticationIsValid } from "../services/pocketbase";
+import {usePathname, useRouter} from "next/navigation";
+import React, {FC, PropsWithChildren, useEffect, useState} from "react";
+import {authenticationIsValid} from "../services/pocketbase";
 
-const RouterGuard = ({ children }: { children: React.ReactNode }) => {
+const RouterGuard: FC<PropsWithChildren> = ({children}) => {
   const router = useRouter();
   const pathname = usePathname();
   const [authorized, setAuthorized] = useState(false);
@@ -13,9 +13,9 @@ const RouterGuard = ({ children }: { children: React.ReactNode }) => {
     authCheck(pathname);
   }, [pathname]);
 
-  function authCheck(url: string | null) {
+  function authCheck(url: string | null): void {
     const publicPaths = ["/login"];
-    if (!url || (!authenticationIsValid() && !publicPaths.includes(url))) {
+    if (url == null || (!authenticationIsValid() && !publicPaths.includes(url))) {
       setAuthorized(false);
       router.push("/login");
     } else {
