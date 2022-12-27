@@ -1,33 +1,23 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import React, { FC, useEffect, useState } from "react";
-import { RecipesResponse } from "../../models/pocketbase-types";
-import {
-  getFileURL,
-  getRecipePage,
-  setLoadedRecipes,
-} from "../../services/pocketbase";
+import React, { FC, useContext, useEffect } from "react";
+import { getFileURL } from "../../services/pocketbase";
 import RecipeHeader from "./header";
 import Searchbar from "./searchbar";
+import { RecipeContext } from "../../contexts/RecipeContext";
 
 const RecipesOverview: FC = () => {
-  const [page, setPage] = useState(1);
-  const [recipes, setrecipes] = useState<RecipesResponse[]>();
+  const { recipes, loadRecipes } = useContext(RecipeContext);
   const router = useRouter();
 
   useEffect(() => {
-    const fetchData = async (): Promise<any> => {
-      try {
-        const result = await getRecipePage(page);
-        setPage(result.page);
-        setrecipes(result.items);
-        setLoadedRecipes(result.items);
-      } catch (error) {}
-    };
-
-    fetchData().catch((e) => {});
+    loadRecipes();
   }, []);
+
+  useEffect(() => {
+    console.log(recipes);
+  }, [recipes]);
 
   return (
     <section className="h-screen">
@@ -36,11 +26,11 @@ const RecipesOverview: FC = () => {
       <div className="p-3 w-full h-full pb-32">
         <div className="overflow-auto h-full w-full bg-white rounded-lg shadow-lg">
           <div className="flex flex-wrap justify-evenly px-3 py-3">
-            {recipes?.map((recipe, index) => {
+            {recipes.map((recipe) => {
               const fileUrl = getFileURL(recipe, recipe.picture);
               return (
                 <div
-                  key={index}
+                  key={recipe.id}
                   className="relative m-2 w-auto h-auto rounded-lg cursor-pointer"
                   onClick={() => router.push(`/recipes/${recipe.id}`)}
                 >

@@ -1,9 +1,14 @@
-import React, {ReactElement} from "react";
+import React, { ReactElement } from "react";
+import RecipeProvider from "../../contexts/RecipeContext";
 
-export default function RecipeLayout({children,}: {
+export default function RecipeLayout({
+  children,
+}: {
   children: React.ReactNode;
 }): ReactElement {
-  return <section className="overflow-hidden h-screen">{children}</section>;
-
-
+  return (
+    <section className="overflow-hidden h-screen">
+      <RecipeProvider>{children}</RecipeProvider>
+    </section>
+  );
 }
