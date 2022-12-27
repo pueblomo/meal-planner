@@ -1,14 +1,22 @@
 "use client";
-import React, { FC, ReactElement, useEffect, useState } from "react";
+import React, {
+  FC,
+  ReactElement,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 import { RecipesResponse } from "../../../models/pocketbase-types";
-import { getFileURL, getRecipe } from "../../../services/pocketbase";
+import { getFileURL } from "../../../services/pocketbase";
 import ShowRecipeHeader from "./header";
+import { RecipeContext } from "../../../contexts/RecipeContext";
 
 interface ShowRecipeProps {
   params: { id: string };
 }
 
 const ShowRecipe: FC<ShowRecipeProps> = ({ params }): ReactElement => {
+  const { getRecipe } = useContext(RecipeContext);
   const [recipe, setRecipe] = useState<RecipesResponse | undefined>();
   const [fileUrl, setFileUrl] = useState<string | undefined>();
 
@@ -38,9 +46,12 @@ const ShowRecipe: FC<ShowRecipeProps> = ({ params }): ReactElement => {
             </p>
           </div>
           <div className="flex flex-wrap justify-around">
-            {recipe?.ingredients?.map((ing, key) => {
+            {recipe?.ingredients?.map((ing) => {
               return (
-                <div className="flex justify-evenly" key={key}>
+                <div
+                  className="flex justify-evenly"
+                  key={ing.name + ing.amount}
+                >
                   <div className="p-2 flex items-center">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"

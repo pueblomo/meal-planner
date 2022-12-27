@@ -1,11 +1,11 @@
 "use client";
 import { useRouter } from "next/navigation";
-import React, { FC } from "react";
+import React, { FC, useContext } from "react";
 import { useFieldArray, useForm } from "react-hook-form";
 
 import Input from "../../../components/input/input";
-import { createRecipe } from "../../../services/pocketbase";
 import AddRecipeHeader from "./header";
+import { RecipeContext } from "../../../contexts/RecipeContext";
 
 export interface RecipeFormValues {
   name: string;
@@ -16,6 +16,7 @@ export interface RecipeFormValues {
 
 const AddRecipe: FC = () => {
   const { register, handleSubmit, control } = useForm<RecipeFormValues>();
+  const { saveRecipe } = useContext(RecipeContext);
 
   const { fields, append } = useFieldArray({
     name: "ingredients",
@@ -25,7 +26,7 @@ const AddRecipe: FC = () => {
   const router = useRouter();
 
   const onSubmit = (data: RecipeFormValues): void => {
-    createRecipe(data);
+    saveRecipe(data);
     router.push("/recipes");
   };
 

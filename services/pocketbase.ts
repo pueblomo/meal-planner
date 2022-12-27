@@ -1,34 +1,43 @@
-import PocketBase, {ListResult, RecordAuthResponse} from "pocketbase";
-import {RecipeFormValues} from "../app/recipes/add/page";
-import {Collections, RecipesResponse} from "../models/pocketbase-types";
+import PocketBase, { ListResult, RecordAuthResponse } from "pocketbase";
+import { RecipeFormValues } from "../app/recipes/add/page";
+import { Collections, RecipesResponse } from "../models/pocketbase-types";
 
-const pb = new PocketBase("http://192.168.178.53:8090");
+const pb = new PocketBase("http://0.0.0.0:8090");
 
-const loadedRecipes: RecipesResponse[] = [];
-
-export async function login(email: string, password: string): Promise<RecordAuthResponse<any>> {
+export async function login(
+  email: string,
+  password: string
+): Promise<RecordAuthResponse<any>> {
   pb.authStore.clear();
-  return await pb.collection(Collections.Users).authWithPassword(email, password);
+  return await pb
+    .collection(Collections.Users)
+    .authWithPassword(email, password);
 }
 
 export function authenticationIsValid(): boolean {
   return pb.authStore.isValid;
 }
 
-export async function createUser(email: string, password: string): Promise<Record<any, any>> {
+export async function createUser(
+  email: string,
+  password: string
+): Promise<Record<any, any>> {
   const data = {
-    'username': email.split("@")[0],
+    username: email.split("@")[0],
     email,
-    'emailVisibility': true,
+    emailVisibility: true,
     password,
-    'name': 'Hans',
-    'passwordConfirm': password,
+    name: "Hans",
+    passwordConfirm: password,
   };
 
   return await pb.collection(Collections.Users).create(data);
 }
 
-export async function getRecipePage(page = 1, size = 20): Promise<ListResult<RecipesResponse>> {
+export async function getRecipePage(
+  page = 1,
+  size = 20
+): Promise<ListResult<RecipesResponse>> {
   if (pb.authStore.model == null) {
     throw new Error("Model is null");
   }
@@ -58,21 +67,28 @@ export function createRecipe(recipeData: RecipeFormValues): void {
     formData.append("user_id", pb.authStore.model?.id);
   }
 
-  pb.collection(Collections.Recipes).create(formData).catch(e => console.log(e));
+  pb.collection(Collections.Recipes)
+    .create(formData)
+    .catch((e) => console.log(e));
 }
 
 export function getFileURL(record: any, filename: string | undefined): string {
   if (filename != null) {
     return pb.getFileUrl(record, filename);
   }
-  throw new Error("Filename not set")
+  throw new Error("Filename not set");
 }
 
-export function setLoadedRecipes(recipes: RecipesResponse[]): void {
-  loadedRecipes.splice(0, loadedRecipes.length);
-  loadedRecipes.push(...recipes);
-}
+export async function searchRecipe(
+  searchString: string
+): Promise<RecipesResponse[]> {
+  if (pb.authStore.model == null) {
+    throw new Error("Model is null");
+  }
 
-export function getRecipe(id: string): RecipesResponse | undefined {
-  return loadedRecipes.find((recipe) => recipe.id === id);
+  return await pb
+    .collection(Collections.Recipes)
+    .getFullList<RecipesResponse>(200, {
+      filter: `user_id='${pb.authStore.model.id}'&&(name~'${searchString}'||ingredients~'${searchString}')`,
+    });
 }
