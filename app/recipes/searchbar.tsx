@@ -5,6 +5,7 @@ const Searchbar: FC = () => {
   const { searchRecipe } = useContext(RecipeContext);
   const [term, setTerm] = useState("");
   const [debounceTerm, setDebounceTerm] = useState("");
+  const [blur, setBlur] = useState(false);
 
   useEffect(() => {
     const timer = setTimeout(() => setTerm(debounceTerm), 1000);
@@ -12,7 +13,9 @@ const Searchbar: FC = () => {
   }, [debounceTerm]);
 
   useEffect(() => {
-    searchRecipe(term);
+    if (blur) {
+      searchRecipe(term);
+    }
   }, [term]);
 
   return (
@@ -21,6 +24,7 @@ const Searchbar: FC = () => {
         className="xl:border-2 border-2 border-[#b44593] shadow-lg rounded-lg xl:p-1 p-2 transition duration-150 ease-in-out focus:outline-none xl:text-base text-base"
         placeholder="search recipe"
         onChange={(e) => setDebounceTerm(e.target.value)}
+        onBlur={() => setBlur(true)}
       />
     </div>
   );

@@ -1,6 +1,6 @@
 import PocketBase, { ListResult, RecordAuthResponse } from "pocketbase";
-import { RecipeFormValues } from "../app/recipes/add/page";
 import { Collections, RecipesResponse } from "../models/pocketbase-types";
+import { RecipeFormValues } from "../components/RecipeForm";
 
 const pb = new PocketBase("http://0.0.0.0:8090");
 
@@ -49,6 +49,33 @@ export async function getRecipePage(
 }
 
 export function createRecipe(recipeData: RecipeFormValues): void {
+  const formData = extracted(recipeData);
+  if (pb.authStore.model != null) {
+    formData.append("user_id", pb.authStore.model?.id);
+  }
+
+  pb.collection(Collections.Recipes)
+    .create(formData)
+    .catch((e) => console.log(e));
+}
+
+export function updateRecipe(
+  recipeData: RecipeFormValues,
+  oldRecipe: RecipesResponse
+): void {
+  const formData = extracted(recipeData);
+  if (pb.authStore.model != null) {
+    formData.append("user_id", oldRecipe.user_id);
+  }
+  console.log("update data");
+  console.log(formData);
+
+  pb.collection(Collections.Recipes)
+    .update(oldRecipe.id, formData)
+    .catch((e) => console.log(e));
+}
+
+function extracted(recipeData: RecipeFormValues): FormData {
   const formData = new FormData();
 
   if (recipeData.name !== "") {
@@ -63,13 +90,7 @@ export function createRecipe(recipeData: RecipeFormValues): void {
   if (recipeData.picture.length > 0) {
     formData.append("picture", recipeData.picture[0]);
   }
-  if (pb.authStore.model != null) {
-    formData.append("user_id", pb.authStore.model?.id);
-  }
-
-  pb.collection(Collections.Recipes)
-    .create(formData)
-    .catch((e) => console.log(e));
+  return formData;
 }
 
 export function getFileURL(record: any, filename: string | undefined): string {
