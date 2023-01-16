@@ -1,6 +1,6 @@
 import React, { FC, useState } from "react";
 import { useForm } from "react-hook-form";
-import Input from "../../components/input/input";
+import Input from "../../components/input";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useRouter } from "next/navigation";

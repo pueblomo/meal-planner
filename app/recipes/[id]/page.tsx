@@ -10,6 +10,7 @@ import { RecipesResponse } from "../../../models/pocketbase-types";
 import { getFileURL } from "../../../services/pocketbase";
 import ShowRecipeHeader from "./header";
 import { RecipeContext } from "../../../contexts/RecipeContext";
+import Chip from "../../../components/chip";
 
 interface ShowRecipeProps {
   params: { id: string };
@@ -32,7 +33,7 @@ const ShowRecipe: FC<ShowRecipeProps> = ({ params }): ReactElement => {
 
   return (
     <section className="h-screen">
-      <ShowRecipeHeader />
+      <ShowRecipeHeader params={params} />
       <div className="p-3 w-full h-full pb-16">
         <div className="overflow-auto flex w-full flex-col h-full divide-y-2 bg-white rounded-lg shadow-lg">
           <div className="relative w-full h-1/4">
@@ -45,31 +46,18 @@ const ShowRecipe: FC<ShowRecipeProps> = ({ params }): ReactElement => {
               {recipe?.name}
             </p>
           </div>
-          <div className="flex flex-wrap justify-around">
-            {recipe?.ingredients?.map((ing) => {
+          <div className="flex flex-wrap items-start ">
+            {recipe?.ingredients?.map((ingredient) => {
               return (
                 <div
-                  className="flex justify-evenly"
-                  key={ing.name + ing.amount}
+                  className="w-1/2 p-1"
+                  key={ingredient.name + ingredient.amount}
                 >
-                  <div className="p-2 flex items-center">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      strokeWidth={1.5}
-                      stroke="currentColor"
-                      className="w-3 h-3"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M8.25 4.5l7.5 7.5-7.5 7.5"
-                      />
-                    </svg>
-                    {ing.name}
-                  </div>
-                  <div className="p-2">{ing.amount}</div>
+                  <Chip>
+                    <p>
+                      {ingredient.name}: {ingredient.amount}
+                    </p>
+                  </Chip>
                 </div>
               );
             })}

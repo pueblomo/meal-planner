@@ -1,5 +1,5 @@
 "use client";
-import React, { PropsWithChildren, useMemo } from "react";
+import React, { PropsWithChildren } from "react";
 import {
   initialRecipeContextState,
   RecipeContextType,
@@ -9,8 +9,9 @@ import {
   createRecipe,
   getRecipePage,
   searchRecipe as pocketbaseSearchRecipe,
+  updateRecipe as pocketbaseUpdateRecipe,
 } from "../services/pocketbase";
-import { RecipeFormValues } from "../app/recipes/add/page";
+import { RecipeFormValues } from "../components/RecipeForm";
 
 export const RecipeContext = React.createContext<RecipeContextType>(
   initialRecipeContextState
@@ -45,13 +46,24 @@ const RecipeProvider: React.FC<PropsWithChildren> = ({ children }) => {
       .catch((e) => console.log(e));
   };
 
-  const memoValue = useMemo(
-    () => ({ recipes, loadRecipes, saveRecipe, getRecipe, searchRecipe }),
-    []
-  );
+  const updateRecipe = (
+    data: RecipeFormValues,
+    oldRecipe: RecipesResponse
+  ): void => {
+    pocketbaseUpdateRecipe(data, oldRecipe);
+  };
 
   return (
-    <RecipeContext.Provider value={memoValue}>
+    <RecipeContext.Provider
+      value={{
+        recipes,
+        loadRecipes,
+        saveRecipe,
+        getRecipe,
+        searchRecipe,
+        updateRecipe,
+      }}
+    >
       {children}
     </RecipeContext.Provider>
   );
