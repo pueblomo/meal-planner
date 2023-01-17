@@ -104,6 +104,7 @@ const LoginForm: FC = () => {
                 name="email"
                 type="email"
                 register={register}
+                dataCy="input-email"
               />
               <p className="text-lg text-red-500 xl:text-base">
                 {errors.email?.message}
@@ -114,14 +115,16 @@ const LoginForm: FC = () => {
                 name="password"
                 type="password"
                 register={register}
+                dataCy="input-password"
               />
-              <p className="text-2xl text-red-500 xl:text-base">
+              <p className="text-lg text-red-500 xl:text-base">
                 {errors.password?.message}
               </p>
             </div>
             <button
               type="submit"
               className="w-6/12 mt-3 text-xl p-1 xl:text-base leading-tight text-white rounded-lg border bg-gradient-to-r from-[#ee7724] via-[#d8363a] via-[#dd3675] to-[#b44593] uppercase"
+              data-cy="button-submit"
             >
               {loginType && "Login"}
               {!loginType && "Register"}
@@ -138,6 +141,7 @@ const LoginForm: FC = () => {
               <button
                 className="p-2 rounded-lg xl:text-base border-2 text-[#ee7724] border-[#b44593] text-xl"
                 onClick={() => setLoginType(!loginType)}
+                data-cy="button-change-form"
               >
                 {loginType && "Register"}
                 {!loginType && "Login"}

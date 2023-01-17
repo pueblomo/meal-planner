@@ -7,6 +7,7 @@ interface inputProps {
   placeholder?: string;
   type?: string;
   register: UseFormRegister<any>;
+  dataCy: string;
 }
 
 const Input: FC<inputProps> = ({
@@ -15,6 +16,7 @@ const Input: FC<inputProps> = ({
   type = "text",
   register,
   name,
+  dataCy,
 }) => {
   return (
     <div>
@@ -24,6 +26,7 @@ const Input: FC<inputProps> = ({
         type={type}
         {...register(name)}
         className="p-1 my-1 w-full text-base shadow-lg rounded-md border border-gray-600 transition duration-150 ease-in-out xl:text-base focus:border-[#b44593] focus:outline-none"
+        data-cy={dataCy}
       />
     </div>
   );

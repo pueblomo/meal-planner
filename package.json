@@ -6,7 +6,10 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "pocketbase": "rm -rf cypress/pocketbase-e2e/pb_data/* && cp -r cypress/pocketbase-e2e/backup/pb_data cypress/pocketbase-e2e/ && ./cypress/pocketbase-e2e/pocketbase serve --http=\"0.0.0.0:8090\"",
+    "cypress": "cypress open",
+    "e2e": "concurrently \"npm run pocketbase\" \"next build && start-server-and-test start http://localhost:3000 cypress\""
   },
   "dependencies": {
     "@hookform/resolvers": "^2.9.10",
@@ -26,6 +29,7 @@
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^5.48.2",
     "autoprefixer": "^10.4.13",
+    "concurrently": "^7.6.0",
     "cypress": "^12.3.0",
     "eslint": "^8.32.0",
     "eslint-config-prettier": "^8.6.0",

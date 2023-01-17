@@ -18,6 +18,7 @@ const ShowRecipeHeader: FC<ShowRecipeHeaderProps> = ({ params }) => {
       <Link
         href={`/recipes/${params.id}/edit`}
         className="xl:p-1 p-1 text-base xl:text-base text-white rounded-lg border-2 border-[#ee7724] shadow-md"
+        data-cy="link-edit-recipe"
       >
         Edit
       </Link>

@@ -42,7 +42,10 @@ const ShowRecipe: FC<ShowRecipeProps> = ({ params }): ReactElement => {
               className="object-cover w-full h-full"
               alt="Recipe Cover"
             />
-            <p className="absolute right-1 bottom-1 px-2 m-2 text-lg font-bold text-white bg-black bg-opacity-50 rounded-lg xl:px-1 xl:m-1 xl:text-base">
+            <p
+              className="absolute right-1 bottom-1 px-2 m-2 text-lg font-bold text-white bg-black bg-opacity-50 rounded-lg xl:px-1 xl:m-1 xl:text-base"
+              data-cy="p-name"
+            >
               {recipe?.name}
             </p>
           </div>
@@ -62,7 +65,9 @@ const ShowRecipe: FC<ShowRecipeProps> = ({ params }): ReactElement => {
               );
             })}
           </div>
-          <p className="p-2 whitespace-pre-line">{recipe?.preparation}</p>
+          <p className="p-2 whitespace-pre-line" data-cy="p-preparation">
+            {recipe?.preparation}
+          </p>
         </div>
       </div>
     </section>

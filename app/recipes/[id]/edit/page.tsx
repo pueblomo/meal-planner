@@ -13,7 +13,7 @@ interface EditRecipeProps {
 }
 
 const AddRecipe: FC<EditRecipeProps> = ({ params }) => {
-  const { updateRecipe, getRecipe, loadRecipes } = useContext(RecipeContext);
+  const { updateRecipe, getRecipe } = useContext(RecipeContext);
   const [recipe, setRecipe] = useState<RecipesResponse | null>(null);
   const router = useRouter();
 
@@ -24,7 +24,6 @@ const AddRecipe: FC<EditRecipeProps> = ({ params }) => {
     if (recipe != null) {
       updateRecipe(data, recipe);
     }
-    loadRecipes();
     router.push("/recipes");
   };
 
