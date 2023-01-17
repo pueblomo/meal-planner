@@ -6,7 +6,8 @@ module.exports = {
   extends: [
     'plugin:react/recommended',
     'standard-with-typescript',
-    'prettier'
+    'prettier',
+    'plugin:cypress/recommended'
   ],
   overrides: [
   ],
@@ -16,7 +17,8 @@ module.exports = {
     project: "tsconfig.json"
   },
   plugins: [
-    'react'
+    'react',
+    'cypress'
   ],
   rules: {
   }
