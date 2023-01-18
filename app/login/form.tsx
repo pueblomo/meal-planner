@@ -54,18 +54,21 @@ const LoginForm: FC = () => {
           }
         });
     } else {
-      createUser(data.email, data.password).catch((e) => {
-        if (e instanceof ClientResponseError) {
-          setLoginError(e.message);
-        }
-      });
-      login(data.email, data.password)
+      createUser(data.email, data.password)
         .then(() => {
-          if (authenticationIsValid()) {
-            router.push("/recipes");
-          } else {
-            setLoginError("authentication invalid");
-          }
+          login(data.email, data.password)
+            .then(() => {
+              if (authenticationIsValid()) {
+                router.push("/recipes");
+              } else {
+                setLoginError("authentication invalid");
+              }
+            })
+            .catch((e) => {
+              if (e instanceof ClientResponseError) {
+                setLoginError(e.message);
+              }
+            });
         })
         .catch((e) => {
           if (e instanceof ClientResponseError) {

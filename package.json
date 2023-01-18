@@ -9,7 +9,8 @@
     "lint": "next lint",
     "pocketbase": "rm -rf cypress/pocketbase-e2e/pb_data/* && cp -r cypress/pocketbase-e2e/backup/pb_data cypress/pocketbase-e2e/ && ./cypress/pocketbase-e2e/pocketbase serve --http=\"0.0.0.0:8090\"",
     "cypress": "cypress open",
-    "e2e": "concurrently \"npm run pocketbase\" \"next build && start-server-and-test start http://localhost:3000 cypress\""
+    "e2e": "concurrently \"npm run pocketbase\" \"next build && start-server-and-test start http://localhost:3000 cypress\"",
+    "pipeline": "concurrently \"npm run pocketbase\" \"npm run start\""
   },
   "dependencies": {
     "@hookform/resolvers": "^2.9.10",

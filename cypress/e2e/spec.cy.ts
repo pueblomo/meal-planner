@@ -17,14 +17,8 @@ describe("mobile testing", () => {
     );
   });
 
-  it("should register new user", () => {
+  it("should register new user and login with user", () => {
     cy.get('[data-cy="button-change-form"]').click();
-    cy.get('[data-cy="input-email"]').type("peter@email.de");
-    cy.get('[data-cy="input-password"]').type("einlangespassword");
-    cy.get('[data-cy="button-submit"]').click();
-  });
-
-  it("should login with created user", () => {
     cy.get('[data-cy="input-email"]').type("peter@email.de");
     cy.get('[data-cy="input-password"]').type("einlangespassword");
     cy.get('[data-cy="button-submit"]').click();
