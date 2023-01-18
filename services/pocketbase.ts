@@ -67,8 +67,6 @@ export function updateRecipe(
   if (pb.authStore.model != null) {
     formData.append("user_id", oldRecipe.user_id);
   }
-  console.log("update data");
-  console.log(formData);
 
   pb.collection(Collections.Recipes)
     .update(oldRecipe.id, formData)

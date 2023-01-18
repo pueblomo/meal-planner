@@ -1,23 +1,23 @@
 module.exports = {
   env: {
     browser: true,
-    es2021: true
+    es2021: true,
   },
   extends: [
-    'plugin:react/recommended',
-    'standard-with-typescript',
-    'prettier'
+    "plugin:react/recommended",
+    "standard-with-typescript",
+    "prettier",
+    "plugin:cypress/recommended",
+    "plugin:@next/next/recommended",
   ],
-  overrides: [
-  ],
+  overrides: [],
   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: "tsconfig.json"
+    ecmaVersion: "latest",
+    sourceType: "module",
+    project: "tsconfig.json",
   },
-  plugins: [
-    'react'
-  ],
+  plugins: ["react", "cypress"],
   rules: {
-  }
-}
+    "@typescript-eslint/no-misused-promises": "off",
+  },
+};

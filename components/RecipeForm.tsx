@@ -58,6 +58,7 @@ const RecipeForm: FC<RecipeFormProps> = ({ recipe, callback }) => {
             register={register}
             name="name"
             placeholder="Recipe name"
+            dataCy="input-name"
           />
           <textarea
             id="preparation"
@@ -67,14 +68,22 @@ const RecipeForm: FC<RecipeFormProps> = ({ recipe, callback }) => {
             draggable={false}
             rows={10}
             className="p-1 my-1 w-full xl:text-2xl text-base min-h-[14rem] rounded-md border border-gray-600 transition duration-150 ease-in-out xl:text-base focus:border-[#b44593] focus:outline-none"
+            data-cy="textarea-preparation"
           />
-          <Input id="picture" register={register} name="picture" type="file" />
+          <Input
+            id="picture"
+            register={register}
+            name="picture"
+            type="file"
+            dataCy="input-picture"
+          />
           <div className="flex justify-between items-center">
             <p className="xl:text-base text-base">Ingredients:</p>
             <button
               onClick={() => append({ name: "", amount: "" })}
               className="p-2 font-bold xl:text-2xl text-lg text-[#b44593]"
               type="button"
+              data-cy="button-add"
             >
               <AddIcon />
             </button>
@@ -87,12 +96,14 @@ const RecipeForm: FC<RecipeFormProps> = ({ recipe, callback }) => {
                   id={`ingredients.${index}.name`}
                   placeholder="Ingredient"
                   register={register}
+                  dataCy={`input-ingredient-${index}`}
                 />
                 <Input
                   name={`ingredients.${index}.amount`}
                   id={`ingredients.${index}.amount`}
                   placeholder="Amount"
                   register={register}
+                  dataCy={`input-amount-${index}`}
                 />
               </div>
             );
@@ -100,6 +111,7 @@ const RecipeForm: FC<RecipeFormProps> = ({ recipe, callback }) => {
           <button
             type="submit"
             className="w-6/12 my-3 xl:text-2xl text-lg shadow-lg self-center xl:p-1 p-2 xl:text-base leading-tight text-white rounded-lg border bg-gradient-to-r from-[#ee7724] via-[#d8363a] via-[#dd3675] to-[#b44593] uppercase"
+            data-cy="button-submit"
           >
             Add
           </button>

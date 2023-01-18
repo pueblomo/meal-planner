@@ -7,6 +7,7 @@ const RecipeHeader: FC = () => {
       <Link
         href="/recipes/add"
         className="xl:p-1 p-1 text-base xl:text-base text-white rounded-lg border-2 xl:border-2 border-[#ee7724] shadow-md"
+        data-cy="link-recipes-add"
       >
         Add Recipe
       </Link>
