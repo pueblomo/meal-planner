@@ -59,18 +59,18 @@ export function createRecipe(recipeData: RecipeFormValues): void {
     .catch((e) => console.log(e));
 }
 
-export function updateRecipe(
+export async function updateRecipe(
   recipeData: RecipeFormValues,
   oldRecipe: RecipesResponse
-): void {
+): Promise<Record<any, any>> {
   const formData = extracted(recipeData);
   if (pb.authStore.model != null) {
     formData.append("user_id", oldRecipe.user_id);
   }
 
-  pb.collection(Collections.Recipes)
-    .update(oldRecipe.id, formData)
-    .catch((e) => console.log(e));
+  return await pb
+    .collection(Collections.Recipes)
+    .update(oldRecipe.id, formData);
 }
 
 function extracted(recipeData: RecipeFormValues): FormData {
