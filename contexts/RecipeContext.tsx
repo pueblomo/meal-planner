@@ -50,8 +50,9 @@ const RecipeProvider: React.FC<PropsWithChildren> = ({ children }) => {
     data: RecipeFormValues,
     oldRecipe: RecipesResponse
   ): void => {
-    pocketbaseUpdateRecipe(data, oldRecipe);
-    loadRecipes();
+    pocketbaseUpdateRecipe(data, oldRecipe)
+      .then(() => loadRecipes())
+      .catch((e) => console.log(e));
   };
 
   return (
