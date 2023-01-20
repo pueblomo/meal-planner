@@ -6,6 +6,7 @@ import { getFileURL } from "../../services/pocketbase";
 import RecipeHeader from "./header";
 import Searchbar from "./searchbar";
 import { RecipeContext } from "../../contexts/RecipeContext";
+import Tab from "../../components/tab";
 
 const RecipesOverview: FC = () => {
   const { recipes, loadRecipes } = useContext(RecipeContext);
@@ -19,7 +20,7 @@ const RecipesOverview: FC = () => {
     <section className="h-screen">
       <RecipeHeader />
       <Searchbar />
-      <div className="p-3 w-full h-full pb-32">
+      <div className="p-3 w-full h-4/5">
         <div className="overflow-auto h-full w-full bg-white rounded-lg shadow-lg">
           <div className="flex justify-center">
             <div className="flex flex-wrap justify-start px-3 py-3">
@@ -46,6 +47,7 @@ const RecipesOverview: FC = () => {
           </div>
         </div>
       </div>
+      <Tab active={0} />
     </section>
   );
 };

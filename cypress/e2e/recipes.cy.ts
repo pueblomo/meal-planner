@@ -1,3 +1,8 @@
+const login = (): void => {
+  cy.get('[data-cy="input-email"]').type("peter@email.de");
+  cy.get('[data-cy="input-password"]').type("einlangespassword");
+  cy.get('[data-cy="button-submit"]').click();
+};
 describe("mobile testing", () => {
   const preparationText =
     "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, \nsed diam nonumy eirmod tempor invidunt ut labore et dolore magna\n\n aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam \n\nerat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus\n\n\n est Lorem ipsum dolor sit amet.";
@@ -19,17 +24,13 @@ describe("mobile testing", () => {
 
   it("should register new user and login with user", () => {
     cy.get('[data-cy="button-change-form"]').click();
-    cy.get('[data-cy="input-email"]').type("peter@email.de");
-    cy.get('[data-cy="input-password"]').type("einlangespassword");
-    cy.get('[data-cy="button-submit"]').click();
+    login();
 
     cy.url().should("include", "recipes");
   });
 
   it("should create new recipe and redirect to recipes", () => {
-    cy.get('[data-cy="input-email"]').type("peter@email.de");
-    cy.get('[data-cy="input-password"]').type("einlangespassword");
-    cy.get('[data-cy="button-submit"]').click();
+    login();
 
     cy.get('[data-cy="link-recipes-add"]').click();
 
@@ -53,9 +54,7 @@ describe("mobile testing", () => {
   });
 
   it("should edit created recipe", () => {
-    cy.get('[data-cy="input-email"]').type("peter@email.de");
-    cy.get('[data-cy="input-password"]').type("einlangespassword");
-    cy.get('[data-cy="button-submit"]').click();
+    login();
 
     cy.contains("Test Recipe").click();
     cy.get('[data-cy="link-edit-recipe"]').click();
@@ -64,6 +63,14 @@ describe("mobile testing", () => {
 
     cy.url().should("include", "recipes");
     cy.contains("Edited Recipe").should("be.visible");
+  });
+
+  it("tab should be active and link to recipes", () => {
+    login();
+
+    cy.get('[data-cy="link-recipes"]').click();
+
+    cy.url().should("include", "recipes");
   });
 });
 
