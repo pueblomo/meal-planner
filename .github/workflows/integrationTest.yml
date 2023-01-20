@@ -18,25 +18,10 @@ jobs:
         uses: pnpm/action-setup@v2.2.4
         with:
           version: 7.9.0
-      - name: Get pnpm store directory
-        id: pnpm-cache
-        shell: bash
-        run: |
-          echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
-
-      - uses: actions/cache@v3
-        name: Setup pnpm cache
-        with:
-          path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
-          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
-          restore-keys: |
-            ${{ runner.os }}-pnpm-store-
-      - name: pnpm install
-        run: pnpm install --no-frozen-lockfile
       - name: Cypress run
         uses: cypress-io/github-action@v5 # use the explicit version number
         with:
-          build: pnpm run build
+          build: pnpm install --no-frozen-lockfile && pnpm run build
           start: pnpm run pipeline
       - name: Upload Cypress Screenshots and Videos
         uses: actions/upload-artifact@v3
