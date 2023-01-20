@@ -80,7 +80,9 @@ const RecipeForm: FC<RecipeFormProps> = ({ recipe, callback }) => {
           <div className="flex justify-between items-center">
             <p className="xl:text-base text-base">Ingredients:</p>
             <button
-              onClick={() => append({ name: "", amount: "" })}
+              onClick={() => {
+                append({ name: "", amount: "" });
+              }}
               className="p-2 font-bold xl:text-2xl text-lg text-[#b44593]"
               type="button"
               data-cy="button-add"
