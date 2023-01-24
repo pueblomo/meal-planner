@@ -12,7 +12,7 @@ specifiers:
   eslint: ^8.32.0
   eslint-config-next: 13.1.5
   eslint-config-prettier: ^8.6.0
-  eslint-config-standard-with-typescript: ^31.0.0
+  eslint-config-standard-with-typescript: ^32.0.0
   eslint-plugin-cypress: ^2.12.1
   eslint-plugin-import: ^2.27.5
   eslint-plugin-n: ^15.6.1
@@ -53,7 +53,7 @@ devDependencies:
   cypress: 12.3.0
   eslint: 8.32.0
   eslint-config-prettier: 8.6.0_eslint@8.32.0
-  eslint-config-standard-with-typescript: 31.0.0_ueqzd4a4aaqcnhterfnur4s5iy
+  eslint-config-standard-with-typescript: 32.0.0_ueqzd4a4aaqcnhterfnur4s5iy
   eslint-plugin-cypress: 2.12.1_eslint@8.32.0
   eslint-plugin-import: 2.27.5_2l6piu6guil2f63lj3qmhzbnn4
   eslint-plugin-n: 15.6.1_eslint@8.32.0
@@ -2959,8 +2959,8 @@ packages:
       eslint: 8.32.0
     dev: true
 
-  /eslint-config-standard-with-typescript/31.0.0_ueqzd4a4aaqcnhterfnur4s5iy:
-    resolution: {integrity: sha512-FLTrcJR62gPPPFwwverxwDTcQDb4HOCfDqmELZgNMSbh1M/Ui36X47a9ZANeo3iuPhMOfvrfuShChW9chdasnA==}
+  /eslint-config-standard-with-typescript/32.0.0_ueqzd4a4aaqcnhterfnur4s5iy:
+    resolution: {integrity: sha512-SyfzLvyBbPfxr2K/zNphtl5CGIS7FHH7v0TZrpmuyEXe+S1LFgt8hdJcWZHNxFckAGVQqrCxe/8+9T6n8x0gEA==}
     peerDependencies:
       '@typescript-eslint/eslint-plugin': ^5.0.0
       eslint: ^8.0.1
