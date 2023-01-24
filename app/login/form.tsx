@@ -1,4 +1,4 @@
-import React, { FC, useState } from "react";
+import React, { type FC, useState } from "react";
 import { useForm } from "react-hook-form";
 import Input from "../../components/input";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -143,7 +143,7 @@ const LoginForm: FC = () => {
               {!loginType && <p className="self-center">Have an account?</p>}
               <button
                 className="p-2 rounded-lg xl:text-base border-2 text-[#ee7724] border-[#b44593] text-xl"
-                onClick={() => setLoginType(!loginType)}
+                onClick={() => { setLoginType(!loginType); }}
                 data-cy="button-change-form"
               >
                 {loginType && "Register"}

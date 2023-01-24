@@ -1,7 +1,7 @@
 "use client";
-import React, { FC, useContext } from "react";
+import React, { type FC, useContext } from "react";
 import AddRecipeHeader from "./header";
-import RecipeForm, { RecipeFormValues } from "../../../components/RecipeForm";
+import RecipeForm, { type RecipeFormValues } from "../../../components/RecipeForm";
 import { RecipeContext } from "../../../contexts/RecipeContext";
 import { useRouter } from "next/navigation";
 

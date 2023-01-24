@@ -1,5 +1,5 @@
 "use client";
-import React, { FC } from "react";
+import React, { type FC } from "react";
 import Description from "./description";
 import LoginForm from "./form";
 

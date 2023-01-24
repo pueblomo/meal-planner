@@ -1,6 +1,6 @@
 "use client";
 import LoadingSpinner from "../components/loading-spinner";
-import React, { FC, useEffect } from "react";
+import React, { type FC, useEffect } from "react";
 import { authenticationIsValid } from "../services/pocketbase";
 import { useRouter } from "next/navigation";
 

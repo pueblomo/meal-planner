@@ -18,7 +18,7 @@ export interface BaseSystemFields {
   updated: IsoDateString;
   collectionId: string;
   collectionName: Collections;
-  expand?: { [key: string]: any };
+  expand?: Record<string, any>;
 }
 
 export type AuthSystemFields = {

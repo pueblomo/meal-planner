@@ -1,12 +1,12 @@
 "use client";
 import React, {
-  FC,
-  ReactElement,
+  type FC,
+  type ReactElement,
   useContext,
   useEffect,
   useState,
 } from "react";
-import { RecipesResponse } from "../../../models/pocketbase-types";
+import { type RecipesResponse } from "../../../models/pocketbase-types";
 import { getFileURL } from "../../../services/pocketbase";
 import ShowRecipeHeader from "./header";
 import { RecipeContext } from "../../../contexts/RecipeContext";

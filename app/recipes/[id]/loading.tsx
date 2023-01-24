@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { type FC } from "react";
 import LoadingSpinner from "../../../components/loading-spinner";
 
 const Loading: FC = () => {

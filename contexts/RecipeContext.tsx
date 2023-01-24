@@ -1,17 +1,17 @@
 "use client";
-import React, { PropsWithChildren } from "react";
+import React, { type PropsWithChildren } from "react";
 import {
   initialRecipeContextState,
-  RecipeContextType,
+  type RecipeContextType,
 } from "./RecipeContextType";
-import { RecipesResponse } from "../models/pocketbase-types";
+import { type RecipesResponse } from "../models/pocketbase-types";
 import {
   createRecipe,
   getRecipePage,
   searchRecipe as pocketbaseSearchRecipe,
   updateRecipe as pocketbaseUpdateRecipe,
 } from "../services/pocketbase";
-import { RecipeFormValues } from "../components/RecipeForm";
+import { type RecipeFormValues } from "../components/RecipeForm";
 
 export const RecipeContext = React.createContext<RecipeContextType>(
   initialRecipeContextState
@@ -22,8 +22,8 @@ const RecipeProvider: React.FC<PropsWithChildren> = ({ children }) => {
 
   const loadRecipes = (): void => {
     getRecipePage()
-      .then((loadedRecipes) => setRecipes(loadedRecipes.items))
-      .catch((e) => console.log(e));
+      .then((loadedRecipes) => { setRecipes(loadedRecipes.items); })
+      .catch((e) => { console.log(e); });
   };
 
   const saveRecipe = (recipe: RecipeFormValues): void => {
@@ -42,8 +42,8 @@ const RecipeProvider: React.FC<PropsWithChildren> = ({ children }) => {
 
   const searchRecipe = (searchString: string): void => {
     pocketbaseSearchRecipe(searchString)
-      .then((result) => setRecipes(result))
-      .catch((e) => console.log(e));
+      .then((result) => { setRecipes(result); })
+      .catch((e) => { console.log(e); });
   };
 
   const updateRecipe = (
@@ -51,8 +51,8 @@ const RecipeProvider: React.FC<PropsWithChildren> = ({ children }) => {
     oldRecipe: RecipesResponse
   ): void => {
     pocketbaseUpdateRecipe(data, oldRecipe)
-      .then(() => loadRecipes())
-      .catch((e) => console.log(e));
+      .then(() => { loadRecipes(); })
+      .catch((e) => { console.log(e); });
   };
 
   return (

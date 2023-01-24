@@ -1,5 +1,5 @@
 import Link from "next/link";
-import React, { FC } from "react";
+import React, { type FC } from "react";
 
 interface EditRecipeHeaderProps {
   params: { id: string };

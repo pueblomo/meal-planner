@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import React, { FC } from "react";
+import React, { type FC } from "react";
 
 interface ShowRecipeHeaderProps {
   params: { id: string };
