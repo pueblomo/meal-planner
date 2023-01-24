@@ -29,9 +29,7 @@ describe("mobile testing", () => {
     cy.url().should("include", "recipes");
   });
 
-  it("should create new recipe and redirect to recipes", () => {
-    login();
-
+  const createRecipe = (): void => {
     cy.get('[data-cy="link-recipes-add"]').click();
 
     cy.get('[data-cy="input-name"]').type("Test Recipe");
@@ -48,6 +46,11 @@ describe("mobile testing", () => {
     cy.get('[data-cy="button-submit"]').click();
 
     cy.url().should("include", "recipes");
+  };
+
+  it("should create new recipe and redirect to recipes", () => {
+    login();
+    createRecipe();
     cy.contains("Test Recipe").should("be.visible").click();
 
     cy.get('[data-cy="p-name"]').should("have.text", "Test Recipe");
@@ -71,6 +74,21 @@ describe("mobile testing", () => {
     cy.get('[data-cy="link-recipes"]').click();
 
     cy.url().should("include", "recipes");
+  });
+
+  it("should search recipe", () => {
+    login();
+
+    createRecipe();
+    cy.contains("Test Recipe").should("be.visible");
+    cy.contains("Edited Recipe").should("be.visible");
+
+    cy.get('[data-cy="input-searchbar"]').type("Edit");
+    // eslint-disable-next-line cypress/no-unnecessary-waiting
+    cy.wait(20);
+
+    cy.contains("Test Recipe").should("not.exist");
+    cy.contains("Edited Recipe").should("be.visible");
   });
 });
 

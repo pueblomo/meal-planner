@@ -1,6 +1,6 @@
 "use client";
 
-import React, { FC } from "react";
+import React, { type FC } from "react";
 import RecipeHeader from "./header";
 import Accordion from "../../components/accordion/accordion";
 import Tab from "../../components/tab";

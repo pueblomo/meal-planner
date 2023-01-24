@@ -19,7 +19,7 @@ interface ShowRecipeProps {
 const ShowRecipe: FC<ShowRecipeProps> = ({ params }): ReactElement => {
   const { getRecipe } = useContext(RecipeContext);
   const [recipe, setRecipe] = useState<RecipesResponse | undefined>();
-  const [fileUrl, setFileUrl] = useState<string | undefined>();
+  const [fileUrl, setFileUrl] = useState<string>("");
 
   useEffect(() => {
     setRecipe(getRecipe(params.id));

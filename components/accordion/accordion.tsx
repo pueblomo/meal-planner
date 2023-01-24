@@ -1,6 +1,6 @@
 "use client";
 
-import React, { FC, ReactNode, useState } from "react";
+import React, { type FC, type ReactNode, useState } from "react";
 
 interface Props {
   title: string;
