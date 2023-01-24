@@ -1,7 +1,7 @@
 .next
 next-env.d.ts
 node_modules
-yarn.lock
 package-lock.json
 public
 cypress/support
+cypress/pocketbase-e2e
