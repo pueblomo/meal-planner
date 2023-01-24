@@ -20,7 +20,7 @@ specifiers:
   eslint-plugin-react: ^7.32.1
   next: 13.1.5
   next-pwa: ^5.6.0
-  pocketbase: ^0.10.0
+  pocketbase: ^0.10.1
   postcss: ^8.4.21
   prettier: 2.8.3
   react: 18.2.0
@@ -39,7 +39,7 @@ dependencies:
   eslint-config-next: 13.1.5_7uibuqfxkfaozanbtbziikiqje
   next: 13.1.5_pjwopsidmaokadturxaafygjp4
   next-pwa: 5.6.0_ij6qteokrtqiw5m76vjzv7hpfe
-  pocketbase: 0.10.0
+  pocketbase: 0.10.1
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
   react-hook-form: 7.42.1_react@18.2.0
@@ -4822,8 +4822,8 @@ packages:
       find-up: 4.1.0
     dev: false
 
-  /pocketbase/0.10.0:
-    resolution: {integrity: sha512-OWcPRcOPNiTqek5wkf56mCmkox4w5/h1x+ySBNqzQ0Ux7ztEv3aq3Gr91bwn3VcXN7o48XVbKny7A922hNIbQw==}
+  /pocketbase/0.10.1:
+    resolution: {integrity: sha512-FMBhF+9o2AmdKJYbfz2qunnk4Q5/efYMRcukdQF49UfhsIuaSYl39fSPN1l880bYI4XAvDDeySAjK1MlxrK37A==}
     dev: false
 
   /postcss-import/14.1.0_postcss@8.4.21:
