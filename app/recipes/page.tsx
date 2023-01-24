@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import React, { FC, useContext, useEffect } from "react";
+import React, { type FC, useContext, useEffect } from "react";
 import { getFileURL } from "../../services/pocketbase";
 import RecipeHeader from "./header";
 import Searchbar from "./searchbar";
@@ -30,9 +30,7 @@ const RecipesOverview: FC = () => {
                   <div
                     key={recipe.id}
                     className="relative m-2 w-auto h-auto rounded-lg cursor-pointer"
-                    onClick={() => {
-                      router.push(`/recipes/${recipe.id}`);
-                    }}
+                    onClick={() => { router.push(`/recipes/${recipe.id}`); }}
                   >
                     <img
                       src={fileUrl}

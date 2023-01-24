@@ -1,7 +1,7 @@
 "use client";
-import React, { FC, useEffect } from "react";
+import React, { type FC, useEffect } from "react";
 import { useFieldArray, useForm } from "react-hook-form";
-import { RecipesResponse } from "../models/pocketbase-types";
+import { type RecipesResponse } from "../models/pocketbase-types";
 import Input from "./input";
 import AddIcon from "./icons/addIcon";
 

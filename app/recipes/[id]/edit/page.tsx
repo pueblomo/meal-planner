@@ -1,12 +1,12 @@
 "use client";
-import React, { FC, useContext, useEffect, useState } from "react";
+import React, { type FC, useContext, useEffect, useState } from "react";
 import AddRecipeHeader from "./header";
 import { useRouter } from "next/navigation";
 import { RecipeContext } from "../../../../contexts/RecipeContext";
 import RecipeForm, {
-  RecipeFormValues,
+  type RecipeFormValues,
 } from "../../../../components/RecipeForm";
-import { RecipesResponse } from "../../../../models/pocketbase-types";
+import { type RecipesResponse } from "../../../../models/pocketbase-types";
 
 interface EditRecipeProps {
   params: { id: string };

@@ -1,7 +1,7 @@
-import React, { FC } from "react";
-import { UseFormRegister } from "react-hook-form";
+import React, { type FC } from "react";
+import { type UseFormRegister } from "react-hook-form";
 
-interface inputProps {
+interface InputProps {
   id: string;
   name: string;
   placeholder?: string;
@@ -10,7 +10,7 @@ interface inputProps {
   dataCy: string;
 }
 
-const Input: FC<inputProps> = ({
+const Input: FC<InputProps> = ({
   id,
   placeholder = "",
   type = "text",
