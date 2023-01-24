@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 import React, { type FC, useContext, useEffect } from "react";
 import { getFileURL } from "../../services/pocketbase";
 import RecipeHeader from "./header";
-import Searchbar from "./searchbar";
+import Searchbar from "../../components/searchbar";
 import { RecipeContext } from "../../contexts/RecipeContext";
 import Tab from "../../components/tab";
 
