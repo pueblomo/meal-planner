@@ -79,7 +79,7 @@ const LoginForm: FC = () => {
   };
 
   return (
-    <div className="overflow-auto w-full h-2/4 bg-white rounded-t-lg shadow-lg xl:h-full xl:rounded-l-lg xl:rounded-tr-none xl:w-6/12">
+    <div className="overflow-auto w-full h-2/4 bg-white rounded-t-lg shadow-lg xl:h-full xl:rounded-l-lg xl:rounded-tr-none xl:w-6/12 pb-2">
       <div className="flex flex-col">
         <div className="mt-2 text-center">
           <img

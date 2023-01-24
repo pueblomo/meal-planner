@@ -2,7 +2,7 @@ import React from "react";
 
 interface Props {
   size?: number;
-  color: string;
+  color?: string;
 }
 
 const RecipeIcon: React.FC<Props> = ({ size = 24, color }) => {
