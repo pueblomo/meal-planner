@@ -1,6 +1,6 @@
 import RouterGuard from "./routerGuard";
 import "./globals.css";
-import React, { ReactElement } from "react";
+import React, { type ReactElement } from "react";
 
 export default function RootLayout({
   children,

@@ -1,7 +1,7 @@
 "use client";
 
 import {usePathname, useRouter} from "next/navigation";
-import React, {FC, PropsWithChildren, useEffect, useState} from "react";
+import React, {type FC, type PropsWithChildren, useEffect, useState} from "react";
 import {authenticationIsValid} from "../services/pocketbase";
 
 const RouterGuard: FC<PropsWithChildren> = ({children}) => {

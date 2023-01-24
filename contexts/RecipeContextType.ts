@@ -1,5 +1,5 @@
-import { RecipesResponse } from "../models/pocketbase-types";
-import { RecipeFormValues } from "../components/RecipeForm";
+import { type RecipesResponse } from "../models/pocketbase-types";
+import { type RecipeFormValues } from "../components/RecipeForm";
 
 export interface RecipeContextType {
   recipes: RecipesResponse[];

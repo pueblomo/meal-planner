@@ -1,6 +1,6 @@
-import PocketBase, { ListResult, RecordAuthResponse } from "pocketbase";
-import { Collections, RecipesResponse } from "../models/pocketbase-types";
-import { RecipeFormValues } from "../components/RecipeForm";
+import PocketBase, { type ListResult, type RecordAuthResponse } from "pocketbase";
+import { Collections, type RecipesResponse } from "../models/pocketbase-types";
+import { type RecipeFormValues } from "../components/RecipeForm";
 
 const pb = new PocketBase("http://0.0.0.0:8090");
 
@@ -56,7 +56,7 @@ export function createRecipe(recipeData: RecipeFormValues): void {
 
   pb.collection(Collections.Recipes)
     .create(formData)
-    .catch((e) => console.log(e));
+    .catch((e) => { console.log(e); });
 }
 
 export async function updateRecipe(
