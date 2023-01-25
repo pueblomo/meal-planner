@@ -47,8 +47,8 @@ const RecipeForm: FC<RecipeFormProps> = ({ recipe, callback }) => {
   }, [recipe]);
 
   return (
-    <div className="p-3 w-full h-full pb-16">
-      <div className="overflow-auto w-full h-full bg-white rounded-lg shadow-lg">
+    <div className="p-3 w-full h-[85%] xl:grid xl:place-items-center">
+      <div className="overflow-auto w-full h-full bg-white rounded-lg shadow-lg xl:max-w-4xl">
         <form
           className="flex flex-col gap-2 p-4 h-full"
           onSubmit={handleSubmit(onSubmit)}
@@ -92,7 +92,7 @@ const RecipeForm: FC<RecipeFormProps> = ({ recipe, callback }) => {
           </div>
           {fields.map((field, index) => {
             return (
-              <div key={field.id} className="flex justify-between">
+              <div key={field.id} className="flex justify-evenly">
                 <Input
                   name={`ingredients.${index}.name`}
                   id={`ingredients.${index}.name`}

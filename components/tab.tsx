@@ -10,7 +10,7 @@ interface Props {
 
 const Tab: FC<Props> = ({ active }) => {
   return (
-    <div className="flex bg-white p-2 justify-evenly">
+    <div className="flex bg-white p-2 justify-evenly absolute inset-x-0 bottom-0">
       <Link
         href="/recipes"
         className={`rounded-full border ${

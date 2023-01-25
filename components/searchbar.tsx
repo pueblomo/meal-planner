@@ -1,5 +1,5 @@
 import React, { type FC, useContext, useEffect, useState } from "react";
-import { RecipeContext } from "../../contexts/RecipeContext";
+import { RecipeContext } from "../contexts/RecipeContext";
 
 const Searchbar: FC = () => {
   const { searchRecipe } = useContext(RecipeContext);

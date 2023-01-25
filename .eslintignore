@@ -5,3 +5,4 @@ package-lock.json
 public
 cypress/support
 cypress/pocketbase-e2e
+pocketbase

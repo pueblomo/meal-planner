@@ -22,8 +22,12 @@ const RecipeProvider: React.FC<PropsWithChildren> = ({ children }) => {
 
   const loadRecipes = (): void => {
     getRecipePage()
-      .then((loadedRecipes) => { setRecipes(loadedRecipes.items); })
-      .catch((e) => { console.log(e); });
+      .then((loadedRecipes) => {
+        setRecipes(loadedRecipes.items);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
   };
 
   const saveRecipe = (recipe: RecipeFormValues): void => {
@@ -42,8 +46,12 @@ const RecipeProvider: React.FC<PropsWithChildren> = ({ children }) => {
 
   const searchRecipe = (searchString: string): void => {
     pocketbaseSearchRecipe(searchString)
-      .then((result) => { setRecipes(result); })
-      .catch((e) => { console.log(e); });
+      .then((result) => {
+        setRecipes(result);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
   };
 
   const updateRecipe = (
@@ -51,8 +59,12 @@ const RecipeProvider: React.FC<PropsWithChildren> = ({ children }) => {
     oldRecipe: RecipesResponse
   ): void => {
     pocketbaseUpdateRecipe(data, oldRecipe)
-      .then(() => { loadRecipes(); })
-      .catch((e) => { console.log(e); });
+      .then(() => {
+        loadRecipes();
+      })
+      .catch((e) => {
+        console.log(e);
+      });
   };
 
   return (

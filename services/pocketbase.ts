@@ -1,5 +1,13 @@
-import PocketBase, { type ListResult, type RecordAuthResponse } from "pocketbase";
-import { Collections, type RecipesResponse } from "../models/pocketbase-types";
+import PocketBase, {
+  type ListResult,
+  type RecordAuthResponse,
+} from "pocketbase";
+import {
+  Collections,
+  type PlannedRecipesRecord,
+  type PlannedRecipesResponse,
+  type RecipesResponse,
+} from "../models/pocketbase-types";
 import { type RecipeFormValues } from "../components/RecipeForm";
 
 const pb = new PocketBase("http://0.0.0.0:8090");
@@ -56,7 +64,9 @@ export function createRecipe(recipeData: RecipeFormValues): void {
 
   pb.collection(Collections.Recipes)
     .create(formData)
-    .catch((e) => { console.log(e); });
+    .catch((e) => {
+      console.log(e);
+    });
 }
 
 export async function updateRecipe(
@@ -110,4 +120,33 @@ export async function searchRecipe(
     .getFullList<RecipesResponse>(200, {
       filter: `user_id='${pb.authStore.model.id}'&&(name~'${searchString}'||ingredients~'${searchString}')`,
     });
+}
+
+export async function getPlannedRecipePage(
+  page = 1,
+  size = 50
+): Promise<ListResult<PlannedRecipesResponse>> {
+  if (pb.authStore.model == null) {
+    throw new Error("Model is null");
+  }
+  return await pb
+    .collection(Collections.PlannedRecipes)
+    .getList<PlannedRecipesResponse>(page, size, {
+      filter: `(user_id='${pb.authStore.model.id}')`,
+    });
+}
+
+export async function createPlannedRecipe(
+  data: PlannedRecipesRecord
+): Promise<PlannedRecipesResponse> {
+  if (pb.authStore.model == null) {
+    throw new Error("Model is null");
+  }
+  return await pb
+    .collection(Collections.PlannedRecipes)
+    .create({ ...data, user_id: pb.authStore.model.id });
+}
+
+export async function deletePlannedRecipe(id: string): Promise<boolean> {
+  return await pb.collection(Collections.PlannedRecipes).delete(id);
 }
