@@ -8,7 +8,7 @@ specifiers:
   '@typescript-eslint/eslint-plugin': ^5.49.0
   autoprefixer: ^10.4.13
   concurrently: ^7.6.0
-  cypress: ^12.3.0
+  cypress: ^12.4.0
   eslint: ^8.32.0
   eslint-config-next: 13.1.5
   eslint-config-prettier: ^8.6.0
@@ -50,7 +50,7 @@ devDependencies:
   '@typescript-eslint/eslint-plugin': 5.49.0_caon6io6stgpr7lz2rtbhekxqy
   autoprefixer: 10.4.13_postcss@8.4.21
   concurrently: 7.6.0
-  cypress: 12.3.0
+  cypress: 12.4.0
   eslint: 8.32.0
   eslint-config-prettier: 8.6.0_eslint@8.32.0
   eslint-config-standard-with-typescript: 32.0.0_3ozrqhxsq4rivumccwgffwbcbm
@@ -2605,8 +2605,8 @@ packages:
     resolution: {integrity: sha512-DJR/VvkAvSZW9bTouZue2sSxDwdTN92uHjqeKVm+0dAqdfNykRzQ95tay8aXMBAAPpUiq4Qcug2L7neoRh2Egw==}
     dev: false
 
-  /cypress/12.3.0:
-    resolution: {integrity: sha512-ZQNebibi6NBt51TRxRMYKeFvIiQZ01t50HSy7z/JMgRVqBUey3cdjog5MYEbzG6Ktti5ckDt1tfcC47lmFwXkw==}
+  /cypress/12.4.0:
+    resolution: {integrity: sha512-//h93K/yGC/7pxv1KamlkADbKHLp5h3f9rZDE2McRjXZDagMETH0sXowOOanvhsH8cFt/JWspIcK+p9cuaoAqg==}
     engines: {node: ^14.0.0 || ^16.0.0 || >=18.0.0}
     hasBin: true
     requiresBuild: true
