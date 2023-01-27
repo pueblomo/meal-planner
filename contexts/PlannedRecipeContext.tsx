@@ -14,7 +14,6 @@ import {
   deletePlannedRecipe,
   getPlannedRecipePage,
 } from "../services/pocketbase";
-import { type Days } from "../models/enums/Days";
 
 export const PlannedRecipeContext =
   React.createContext<PlannedRecipeContextType>(
@@ -59,7 +58,7 @@ const PlannedRecipeProvider: React.FC<PropsWithChildren> = ({ children }) => {
   };
 
   const getPlannedRecipes = (
-    day: Days,
+    day: string,
     week: string
   ): PlannedRecipesResponse[] => {
     return plannedRecipes.filter(

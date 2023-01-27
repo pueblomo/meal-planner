@@ -1,6 +1,6 @@
 "use client";
 
-import React, { type FC, useContext, useState } from "react";
+import React, { type FC, useContext, useEffect, useState } from "react";
 import { RecipeContext } from "../../../../contexts/RecipeContext";
 import Searchbar from "../../../../components/searchbar";
 import Recipe from "../../../../components/Recipe";
@@ -15,19 +15,40 @@ interface Params {
 const AddPlannedRecipes: FC<Params> = ({ params }) => {
   const [selectedRecipes, setSelectedRecipes] = useState<string[]>([]);
   const { recipes } = useContext(RecipeContext);
-  const { savePlannedRecipe } = useContext(PlannedRecipeContext);
+  const { savePlannedRecipe, getPlannedRecipes, removePlannedRecipe } =
+    useContext(PlannedRecipeContext);
   const router = useRouter();
 
+  useEffect(() => {
+    const plannedRecipes = getPlannedRecipes(params.day, params.week);
+    plannedRecipes.forEach((recipe) => {
+      setSelectedRecipes((prevState) => [...prevState, recipe.recipeId]);
+    });
+  }, []);
+
   const handleAddPlannedRecipes = (): void => {
-    selectedRecipes.forEach((recipeId) => {
+    const plannedRecipes = getPlannedRecipes(params.day, params.week);
+    const plannedRecipesIds = plannedRecipes.map((recipe) => recipe.recipeId);
+    const newlyAddedRecipes = selectedRecipes.filter(
+      (recipeId) => !plannedRecipesIds.includes(recipeId)
+    );
+    const removedRecipesIds = plannedRecipes
+      .filter((recipe) => !selectedRecipes.includes(recipe.recipeId))
+      .map((recipe) => recipe.id);
+
+    removedRecipesIds.forEach((recipeId) => {
+      removePlannedRecipe(recipeId);
+    });
+
+    newlyAddedRecipes.forEach((recipeId) => {
       savePlannedRecipe({
         recipeId,
         week: params.week,
         day: params.day,
         user_id: "",
       });
-      router.push("/planner");
     });
+    router.push("/planner");
   };
 
   return (
@@ -40,7 +61,7 @@ const AddPlannedRecipes: FC<Params> = ({ params }) => {
           data-cy="button-add"
           onClick={handleAddPlannedRecipes}
         >
-          Add
+          SAVE
         </button>
       </div>
       <div className="p-3 w-full h-4/5">
