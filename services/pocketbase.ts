@@ -1,16 +1,13 @@
-import PocketBase, {
-  type ListResult,
-  type RecordAuthResponse,
-} from "pocketbase";
+import PocketBase, { type ListResult, type RecordAuthResponse } from "pocketbase";
 import {
   Collections,
   type PlannedRecipesRecord,
   type PlannedRecipesResponse,
-  type RecipesResponse,
+  type RecipesResponse
 } from "../models/pocketbase-types";
 import { type RecipeFormValues } from "../components/RecipeForm";
 
-const pb = new PocketBase("http://0.0.0.0:8090");
+const pb = new PocketBase("http://127.0.0.1:8090");
 
 export async function login(
   email: string,
@@ -36,7 +33,7 @@ export async function createUser(
     emailVisibility: true,
     password,
     name: "Hans",
-    passwordConfirm: password,
+    passwordConfirm: password
   };
 
   return await pb.collection(Collections.Users).create(data);
@@ -52,7 +49,7 @@ export async function getRecipePage(
   return await pb
     .collection(Collections.Recipes)
     .getList<RecipesResponse>(page, size, {
-      filter: `(user_id='${pb.authStore.model.id}')`,
+      filter: `(user_id='${pb.authStore.model.id}')`
     });
 }
 
@@ -118,7 +115,7 @@ export async function searchRecipe(
   return await pb
     .collection(Collections.Recipes)
     .getFullList<RecipesResponse>(200, {
-      filter: `user_id='${pb.authStore.model.id}'&&(name~'${searchString}'||ingredients~'${searchString}')`,
+      filter: `user_id='${pb.authStore.model.id}'&&(name~'${searchString}'||ingredients~'${searchString}')`
     });
 }
 
@@ -132,7 +129,7 @@ export async function getPlannedRecipePage(
   return await pb
     .collection(Collections.PlannedRecipes)
     .getList<PlannedRecipesResponse>(page, size, {
-      filter: `(user_id='${pb.authStore.model.id}')`,
+      filter: `(user_id='${pb.authStore.model.id}')`
     });
 }
 

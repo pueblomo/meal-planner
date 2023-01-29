@@ -26,7 +26,7 @@ const AddPlannedRecipes: FC<Params> = ({ params }) => {
     });
   }, []);
 
-  const handleAddPlannedRecipes = (): void => {
+  const handleAddPlannedRecipes = async (): Promise<void> => {
     const plannedRecipes = getPlannedRecipes(params.day, params.week);
     const plannedRecipesIds = plannedRecipes.map((recipe) => recipe.recipeId);
     const newlyAddedRecipes = selectedRecipes.filter(
@@ -36,18 +36,18 @@ const AddPlannedRecipes: FC<Params> = ({ params }) => {
       .filter((recipe) => !selectedRecipes.includes(recipe.recipeId))
       .map((recipe) => recipe.id);
 
-    removedRecipesIds.forEach((recipeId) => {
-      removePlannedRecipe(recipeId);
-    });
+    for (const recipeId of removedRecipesIds) {
+      await removePlannedRecipe(recipeId);
+    }
 
-    newlyAddedRecipes.forEach((recipeId) => {
-      savePlannedRecipe({
+    for (const recipeId of newlyAddedRecipes) {
+      await savePlannedRecipe({
         recipeId,
         week: params.week,
         day: params.day,
-        user_id: "",
+        user_id: ""
       });
-    });
+    }
     router.push("/planner");
   };
 
@@ -78,7 +78,7 @@ const AddPlannedRecipes: FC<Params> = ({ params }) => {
                       setSelectedRecipes((prevState) => {
                         if (prevState.includes(recipe.id)) {
                           return [
-                            ...prevState.filter((rec) => rec !== recipe.id),
+                            ...prevState.filter((rec) => rec !== recipe.id)
                           ];
                         }
                         return [...prevState, recipe.id];

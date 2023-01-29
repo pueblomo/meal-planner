@@ -25,7 +25,7 @@ const RecipesOverview: FC = () => {
       <div className="w-full overflow-auto h-[85%] py-4 px-1">
         {Object.values(Days).map((value, key) => {
           return (
-            <Accordion key={key} title={value}>
+            <Accordion key={value} title={value}>
               <PlannedDay day={value} week={week} />
             </Accordion>
           );

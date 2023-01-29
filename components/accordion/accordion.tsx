@@ -16,6 +16,7 @@ const Accordion: FC<Props> = ({ title, children }) => {
         onClick={() => {
           setIsOpen(!isOpen);
         }}
+        data-cy={`accordion-${title}`}
       >
         <p className="font-bold">{title}</p>
         <svg

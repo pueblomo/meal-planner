@@ -25,6 +25,7 @@ const Tab: FC<Props> = ({ active }) => {
         className={`rounded-full border ${
           active === 1 ? "border-[#b44593]" : "border-gray-300"
         } py-2 px-4 text-center mr-2 shadow-sm`}
+        data-cy="link-planner"
       >
         <PlannerIcon />
       </Link>

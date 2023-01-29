@@ -1,19 +1,9 @@
 "use client";
 
-import {
-  initialPlannedRecipeContextState,
-  type PlannedRecipeContextType,
-} from "./PlannedRecipeContextType";
+import { initialPlannedRecipeContextState, type PlannedRecipeContextType } from "./PlannedRecipeContextType";
 import React, { type PropsWithChildren, useState } from "react";
-import {
-  type PlannedRecipesRecord,
-  type PlannedRecipesResponse,
-} from "../models/pocketbase-types";
-import {
-  createPlannedRecipe,
-  deletePlannedRecipe,
-  getPlannedRecipePage,
-} from "../services/pocketbase";
+import { type PlannedRecipesRecord, type PlannedRecipesResponse } from "../models/pocketbase-types";
+import { createPlannedRecipe, deletePlannedRecipe, getPlannedRecipePage } from "../services/pocketbase";
 
 export const PlannedRecipeContext =
   React.createContext<PlannedRecipeContextType>(
@@ -35,26 +25,14 @@ const PlannedRecipeProvider: React.FC<PropsWithChildren> = ({ children }) => {
       });
   };
 
-  const savePlannedRecipe = (data: PlannedRecipesRecord): void => {
-    createPlannedRecipe(data)
-      .then(() => {
-        loadPlannedRecipes();
-      })
-      .catch((e) => {
-        console.log(e);
-      });
+  const savePlannedRecipe = async (data: PlannedRecipesRecord): Promise<PlannedRecipesResponse> => {
+    return await createPlannedRecipe(data);
+
   };
 
-  const removePlannedRecipe = (id: string): void => {
-    deletePlannedRecipe(id)
-      .then((result) => {
-        if (!result) {
-          console.log("Can't delete planned recipe");
-        }
-      })
-      .catch((e) => {
-        console.log(e);
-      });
+  const removePlannedRecipe = async (id: string): Promise<boolean> => {
+    return await deletePlannedRecipe(id);
+
   };
 
   const getPlannedRecipes = (
@@ -74,7 +52,7 @@ const PlannedRecipeProvider: React.FC<PropsWithChildren> = ({ children }) => {
         savePlannedRecipe,
         removePlannedRecipe,
         getPlannedRecipes,
-        loadPlannedRecipes,
+        loadPlannedRecipes
       }}
     >
       {children}

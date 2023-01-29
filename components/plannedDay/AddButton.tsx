@@ -15,6 +15,7 @@ const AddButton: FC<Props> = ({ day, week }) => {
       onClick={() => {
         router.push(`/planner/${week}/${day}`);
       }}
+      data-cy={`button-${day}`}
     >
       <AddIcon height={"52"} width={"52"} />
     </div>

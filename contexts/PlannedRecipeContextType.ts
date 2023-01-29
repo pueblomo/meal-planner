@@ -1,22 +1,24 @@
-import {
-  type PlannedRecipesRecord,
-  type PlannedRecipesResponse,
-} from "../models/pocketbase-types";
+import { type PlannedRecipesRecord, type PlannedRecipesResponse } from "../models/pocketbase-types";
 
 export interface PlannedRecipeContextType {
   plannedRecipes: PlannedRecipesResponse[];
-  savePlannedRecipe: (data: PlannedRecipesRecord) => void;
+  savePlannedRecipe: (data: PlannedRecipesRecord) => Promise<PlannedRecipesResponse>;
   loadPlannedRecipes: () => void;
   getPlannedRecipes: (day: string, week: string) => PlannedRecipesResponse[];
-  removePlannedRecipe: (id: string) => void;
+  removePlannedRecipe: (id: string) => Promise<boolean>;
 }
 
 export const initialPlannedRecipeContextState: PlannedRecipeContextType = {
   plannedRecipes: [],
-  savePlannedRecipe: () => {},
-  loadPlannedRecipes: () => {},
+  savePlannedRecipe: () => {
+    throw new Error("Not yet implemented!");
+  },
+  loadPlannedRecipes: () => {
+  },
   getPlannedRecipes: () => {
     throw new Error("Not yet implemented!");
   },
-  removePlannedRecipe: () => {},
+  removePlannedRecipe: () => {
+    throw new Error("Not yet implemented!");
+  }
 };
