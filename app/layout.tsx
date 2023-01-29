@@ -1,6 +1,7 @@
 import RouterGuard from "./routerGuard";
 import "./globals.css";
 import React, { type ReactElement } from "react";
+import RecipeProvider from "../contexts/RecipeContext";
 
 export default function RootLayout({
   children,
@@ -21,7 +22,9 @@ export default function RootLayout({
         />
       </head>
       <body className="w-screen">
-        <RouterGuard>{children}</RouterGuard>
+        <RouterGuard>
+          <RecipeProvider>{children}</RecipeProvider>
+        </RouterGuard>
       </body>
     </html>
   );

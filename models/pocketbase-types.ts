@@ -3,6 +3,7 @@
  */
 
 export enum Collections {
+  PlannedRecipes = "planned_recipes",
   Recipes = "recipes",
   Users = "users",
 }
@@ -29,6 +30,15 @@ export type AuthSystemFields = {
 } & BaseSystemFields;
 
 // Record types for each collection
+
+export interface PlannedRecipesRecord {
+  recipeId: string;
+  week: string;
+  day: string;
+  user_id: string;
+}
+
+// Record types for each collection
 export interface Ingredient {
   name: string;
   amount: string;
@@ -48,10 +58,12 @@ export interface UsersRecord {
 }
 
 // Response types include system fields and match responses from the PocketBase API
+export type PlannedRecipesResponse = PlannedRecipesRecord & BaseSystemFields;
 export type RecipesResponse = RecipesRecord & BaseSystemFields;
 export type UsersResponse = UsersRecord & AuthSystemFields;
 
 export interface CollectionRecords {
+  planned_recipes: PlannedRecipesRecord;
   recipes: RecipesRecord;
   users: UsersRecord;
 }

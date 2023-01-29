@@ -10,10 +10,69 @@ import {
   createUser,
   login,
 } from "../../services/pocketbase";
+import { type AppRouterInstance } from "next/dist/shared/lib/app-router-context";
 
 interface Inputs {
   email: string;
   password: string;
+}
+
+function handleLogin(
+  data: { email: string; password: string },
+  router: AppRouterInstance,
+  setLoginError: (
+    value:
+      | ((prevState: string | undefined) => string | undefined)
+      | string
+      | undefined
+  ) => void
+): void {
+  login(data.email, data.password)
+    .then(() => {
+      if (authenticationIsValid()) {
+        router.push("/recipes");
+      } else {
+        setLoginError("authentication invalid");
+      }
+    })
+    .catch((e) => {
+      if (e instanceof ClientResponseError) {
+        setLoginError(e.message);
+      }
+    });
+}
+
+function handleCreateUser(
+  data: { email: string; password: string },
+  router: AppRouterInstance,
+  setLoginError: (
+    value:
+      | ((prevState: string | undefined) => string | undefined)
+      | string
+      | undefined
+  ) => void
+): void {
+  createUser(data.email, data.password)
+    .then(() => {
+      login(data.email, data.password)
+        .then(() => {
+          if (authenticationIsValid()) {
+            router.push("/recipes");
+          } else {
+            setLoginError("authentication invalid");
+          }
+        })
+        .catch((e) => {
+          if (e instanceof ClientResponseError) {
+            setLoginError(e.message);
+          }
+        });
+    })
+    .catch((e) => {
+      if (e instanceof ClientResponseError) {
+        setLoginError(e.message);
+      }
+    });
 }
 
 const schema = yup
@@ -40,46 +99,14 @@ const LoginForm: FC = () => {
     setLoginError(undefined);
 
     if (loginType) {
-      login(data.email, data.password)
-        .then(() => {
-          if (authenticationIsValid()) {
-            router.push("/recipes");
-          } else {
-            setLoginError("authentication invalid");
-          }
-        })
-        .catch((e) => {
-          if (e instanceof ClientResponseError) {
-            setLoginError(e.message);
-          }
-        });
+      handleLogin(data, router, setLoginError);
     } else {
-      createUser(data.email, data.password)
-        .then(() => {
-          login(data.email, data.password)
-            .then(() => {
-              if (authenticationIsValid()) {
-                router.push("/recipes");
-              } else {
-                setLoginError("authentication invalid");
-              }
-            })
-            .catch((e) => {
-              if (e instanceof ClientResponseError) {
-                setLoginError(e.message);
-              }
-            });
-        })
-        .catch((e) => {
-          if (e instanceof ClientResponseError) {
-            setLoginError(e.message);
-          }
-        });
+      handleCreateUser(data, router, setLoginError);
     }
   };
 
   return (
-    <div className="overflow-auto w-full h-2/4 bg-white rounded-t-lg shadow-lg xl:h-full xl:rounded-l-lg xl:rounded-tr-none xl:w-6/12">
+    <div className="overflow-auto w-full h-2/4 bg-white rounded-t-lg shadow-lg xl:h-full xl:rounded-l-lg xl:rounded-tr-none xl:w-6/12 pb-2">
       <div className="flex flex-col">
         <div className="mt-2 text-center">
           <img
@@ -143,7 +170,9 @@ const LoginForm: FC = () => {
               {!loginType && <p className="self-center">Have an account?</p>}
               <button
                 className="p-2 rounded-lg xl:text-base border-2 text-[#ee7724] border-[#b44593] text-xl"
-                onClick={() => { setLoginType(!loginType); }}
+                onClick={() => {
+                  setLoginType(!loginType);
+                }}
                 data-cy="button-change-form"
               >
                 {loginType && "Register"}
