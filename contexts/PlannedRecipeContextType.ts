@@ -3,7 +3,7 @@ import { type PlannedRecipesRecord, type PlannedRecipesResponse } from "../model
 export interface PlannedRecipeContextType {
   plannedRecipes: PlannedRecipesResponse[];
   savePlannedRecipe: (data: PlannedRecipesRecord) => Promise<PlannedRecipesResponse>;
-  loadPlannedRecipes: () => void;
+  loadPlannedRecipes: (week: string) => void;
   getPlannedRecipes: (day: string, week: string) => PlannedRecipesResponse[];
   removePlannedRecipe: (id: string) => Promise<boolean>;
 }

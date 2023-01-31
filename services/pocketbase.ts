@@ -7,7 +7,8 @@ import {
 } from "../models/pocketbase-types";
 import { type RecipeFormValues } from "../components/RecipeForm";
 
-const pb = new PocketBase("http://127.0.0.1:8090");
+// const pb = new PocketBase("http://mac-mini.local:8090");
+const pb = new PocketBase("http://0.0.0.0:8090");
 
 export async function login(
   email: string,
@@ -120,6 +121,7 @@ export async function searchRecipe(
 }
 
 export async function getPlannedRecipePage(
+  week: string,
   page = 1,
   size = 50
 ): Promise<ListResult<PlannedRecipesResponse>> {
@@ -129,7 +131,7 @@ export async function getPlannedRecipePage(
   return await pb
     .collection(Collections.PlannedRecipes)
     .getList<PlannedRecipesResponse>(page, size, {
-      filter: `(user_id='${pb.authStore.model.id}')`
+      filter: `user_id = "${pb.authStore.model.id}" && (week = "${week}" || week = "${parseInt(week) + 1}")`
     });
 }
 

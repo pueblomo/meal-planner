@@ -19,7 +19,7 @@ const RecipesOverview: FC = () => {
     <section className="h-screen">
       <RecipeHeader />
       <Searchbar />
-      <div className="p-3 w-full h-4/5">
+      <div className="p-3 w-full h-[75%]">
         <div className="overflow-auto h-full w-full bg-white rounded-lg shadow-lg">
           <div className="flex justify-center">
             <div className="flex flex-wrap justify-center px-3 py-3">
