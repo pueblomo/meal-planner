@@ -25,7 +25,9 @@ const PlannedDay: FC<Props> = ({ day, week }) => {
 
   useEffect(() => {
     setDisplayedRecipes(getPlannedRecipes(day, week));
-  }, [plannedRecipes]);
+    console.log("displayed recipes");
+    console.log(displayedRecipes);
+  }, [day, week, plannedRecipes]);
 
   return (
     <div className="flex flex-wrap justify-center">

@@ -48,3 +48,6 @@ next-env.d.ts
 /.vscode/
 
 /cypress/pocketbase-e2e/pb_data/*
+/cypress/pocketbase-e2e/pb_migrations/*
+/pocketbase/pb_data/*
+/pocketbase/pb_migrations/*

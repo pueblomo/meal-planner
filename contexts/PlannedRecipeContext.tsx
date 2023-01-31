@@ -15,8 +15,8 @@ const PlannedRecipeProvider: React.FC<PropsWithChildren> = ({ children }) => {
     PlannedRecipesResponse[]
   >([]);
 
-  const loadPlannedRecipes = (): void => {
-    getPlannedRecipePage()
+  const loadPlannedRecipes = (week: string): void => {
+    getPlannedRecipePage(week)
       .then((loadedPlannedRecipes) => {
         setPlannedRecipes(loadedPlannedRecipes.items);
       })
