@@ -7,8 +7,8 @@ import {
 } from "../models/pocketbase-types";
 import { type RecipeFormValues } from "../components/RecipeForm";
 
-// const pb = new PocketBase("http://mac-mini.local:8090");
-const pb = new PocketBase("http://0.0.0.0:8090");
+
+const pb = new PocketBase(process.env.BACKEND);
 
 export async function login(
   email: string,
