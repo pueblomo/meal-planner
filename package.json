@@ -5,13 +5,14 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "build:pipeline": "rm .env.production && cp .env.development .env.production && next build",
     "start": "next start",
     "lint": "next lint",
     "pocketbase": "rm -rf cypress/pocketbase-e2e/pb_data/* && rm -rf cypress/pocketbase-e2e/pb_migrations/* && cp -r cypress/pocketbase-e2e/backup/pb_data cypress/pocketbase-e2e/ && cp -r cypress/pocketbase-e2e/backup/pb_migrations cypress/pocketbase-e2e/ && ./cypress/pocketbase-e2e/pocketbase serve --http=\"0.0.0.0:8090\"",
-    "pocketbase-mac": "rm -rf cypress/pocketbase-e2e/pb_data/* && rm -rf cypress/pocketbase-e2e/pb_migrations/* && cp -r cypress/pocketbase-e2e/backup/pb_data cypress/pocketbase-e2e/ && cp -r cypress/pocketbase-e2e/backup/pb_migrations cypress/pocketbase-e2e/ && ./cypress/pocketbase-e2e/pocketbase_mac serve --http=\"0.0.0.0:8090\"",
+    "pocketbase-mac": "rm -rf cypress/pocketbase-e2e/pb_data/* && rm -rf cypress/pocketbase-e2e/pb_migrations/* && cp -r cypress/pocketbase-e2e/backup/pb_data cypress/pocketbase-e2e/ && cp -r cypress/pocketbase-e2e/backup/pb_migrations cypress/pocketbase-e2e/ && ./cypress/pocketbase-e2e/pocketbase_mac serve --http=\"127.0.0.1:8090\"",
     "cypress": "cypress open",
     "e2e": "concurrently \"npm run pocketbase\" \"next build && start-server-and-test start http://localhost:3000 cypress\"",
-    "e2e-mac": "concurrently \"npm run pocketbase-mac\" \"next build && next start\" \"npm run cypress\"",
+    "e2e-mac": "concurrently \"npm run pocketbase-mac\" \"next build && next dev\" \"npm run cypress\"",
     "pipeline": "concurrently \"npm run pocketbase\" \"npm run start\""
   },
   "dependencies": {
@@ -19,6 +20,7 @@
     "@types/node": "18.11.18",
     "@types/react": "18.0.27",
     "@types/react-dom": "18.0.10",
+    "env-cmd": "^10.1.0",
     "eslint-config-next": "13.1.6",
     "moment": "^2.29.4",
     "next": "13.1.6",
