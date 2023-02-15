@@ -19,7 +19,7 @@
     "@hookform/resolvers": "^2.9.11",
     "@types/node": "18.13.0",
     "@types/react": "18.0.28",
-    "@types/react-dom": "18.0.10",
+    "@types/react-dom": "18.0.11",
     "env-cmd": "^10.1.0",
     "eslint-config-next": "13.1.6",
     "moment": "^2.29.4",
@@ -29,11 +29,11 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-hook-form": "^7.43.1",
-    "start-server-and-test": "^1.15.3",
+    "start-server-and-test": "^1.15.4",
     "yup": "^1.0.0"
   },
   "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "^5.51.0",
+    "@typescript-eslint/eslint-plugin": "^5.52.0",
     "autoprefixer": "^10.4.13",
     "concurrently": "^7.6.0",
     "cypress": "^12.5.1",
