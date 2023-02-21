@@ -33,7 +33,7 @@
     "yup": "^1.0.0"
   },
   "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "^5.52.0",
+    "@typescript-eslint/eslint-plugin": "^5.53.0",
     "autoprefixer": "^10.4.13",
     "concurrently": "^7.6.0",
     "cypress": "^12.5.1",
