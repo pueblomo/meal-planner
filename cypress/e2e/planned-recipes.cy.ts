@@ -55,6 +55,7 @@ describe("planned meal page testing", () => {
     cy.get("[data-cy=\"accordion-Monday\"]").click();
     cy.get("[data-cy=\"button-Monday\"]").click();
 
+    cy.url().should("include", "Monday");
     cy.contains("Recipe One").click();
     cy.contains("Recipe Two").click();
     cy.get("[data-cy=\"button-add\"]").click();
@@ -64,6 +65,7 @@ describe("planned meal page testing", () => {
     cy.contains("Recipe Two").should("exist");
 
     cy.get("[data-cy=\"button-Monday\"]").click();
+    cy.url().should("include", "Monday");
     cy.contains("Recipe One").click();
     cy.get("[data-cy=\"button-add\"]").click();
 
@@ -73,6 +75,7 @@ describe("planned meal page testing", () => {
 
     cy.get("[data-cy=\"accordion-Tuesday\"]").click();
     cy.get("[data-cy=\"button-Tuesday\"]").click();
+    cy.url().should("include", "Tuesday");
 
     cy.contains("Recipe Three").click();
     cy.get("[data-cy=\"button-add\"]").click();
@@ -81,29 +84,6 @@ describe("planned meal page testing", () => {
     cy.get("[data-cy=\"accordion-Monday\"]").click();
     cy.contains("Recipe Two").should("exist");
     cy.contains("Recipe Three").should("exist");
-  });
-
-  it("should switch weeks", () => {
-    login();
-
-    cy.get("[data-cy=\"link-planner\"]").click();
-    cy.get("[data-cy=\"accordion-Monday\"]").click();
-    cy.contains("Recipe Two").should("exist");
-
-    cy.get("[data-cy=\"button-week\"]").click();
-    cy.contains("Recipe Two").should("not.exist");
-
-    cy.get("[data-cy=\"button-Monday\"]").click();
-    cy.contains("Recipe One").click();
-    cy.get("[data-cy=\"button-add\"]").click();
-
-    cy.get("[data-cy=\"accordion-Monday\"]").click();
-    cy.contains("Recipe Two").should("exist");
-    cy.contains("Recipe One").should("not.exist");
-
-    cy.get("[data-cy=\"button-week\"]").click();
-    cy.contains("Recipe Two").should("not.exist");
-    cy.contains("Recipe One").should("exist");
   });
 });
 

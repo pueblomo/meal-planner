@@ -15,7 +15,7 @@ interface Params {
 const AddPlannedRecipes: FC<Params> = ({ params }) => {
   const [selectedRecipes, setSelectedRecipes] = useState<string[]>([]);
   const { recipes } = useContext(RecipeContext);
-  const { savePlannedRecipe, getPlannedRecipes, removePlannedRecipe } =
+  const { savePlannedRecipe, getPlannedRecipes, removePlannedRecipe, loadPlannedRecipes } =
     useContext(PlannedRecipeContext);
   const router = useRouter();
 
@@ -48,6 +48,7 @@ const AddPlannedRecipes: FC<Params> = ({ params }) => {
         user_id: ""
       });
     }
+    loadPlannedRecipes(params.week);
     router.push("/planner");
   };
 

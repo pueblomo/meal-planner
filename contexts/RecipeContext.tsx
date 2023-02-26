@@ -1,15 +1,12 @@
 "use client";
-import React, { type PropsWithChildren } from "react";
-import {
-  initialRecipeContextState,
-  type RecipeContextType,
-} from "./RecipeContextType";
+import React, { type PropsWithChildren, useEffect } from "react";
+import { initialRecipeContextState, type RecipeContextType } from "./RecipeContextType";
 import { type RecipesResponse } from "../models/pocketbase-types";
 import {
   createRecipe,
   getRecipePage,
   searchRecipe as pocketbaseSearchRecipe,
-  updateRecipe as pocketbaseUpdateRecipe,
+  updateRecipe as pocketbaseUpdateRecipe
 } from "../services/pocketbase";
 import { type RecipeFormValues } from "../components/RecipeForm";
 
@@ -20,6 +17,10 @@ export const RecipeContext = React.createContext<RecipeContextType>(
 const RecipeProvider: React.FC<PropsWithChildren> = ({ children }) => {
   const [recipes, setRecipes] = React.useState<RecipesResponse[]>([]);
 
+  useEffect(() => {
+    loadRecipes();
+  }, []);
+  
   const loadRecipes = (): void => {
     getRecipePage()
       .then((loadedRecipes) => {
@@ -75,7 +76,7 @@ const RecipeProvider: React.FC<PropsWithChildren> = ({ children }) => {
         saveRecipe,
         getRecipe,
         searchRecipe,
-        updateRecipe,
+        updateRecipe
       }}
     >
       {children}

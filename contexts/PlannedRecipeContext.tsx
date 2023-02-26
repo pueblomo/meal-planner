@@ -1,10 +1,12 @@
 "use client";
 
 import { initialPlannedRecipeContextState, type PlannedRecipeContextType } from "./PlannedRecipeContextType";
-import React, { type PropsWithChildren, useState } from "react";
+import React, { type PropsWithChildren, useEffect, useState } from "react";
 import { type PlannedRecipesRecord, type PlannedRecipesResponse } from "../models/pocketbase-types";
 import { createPlannedRecipe, deletePlannedRecipe, getPlannedRecipePage } from "../services/pocketbase";
+import moment from "moment/moment";
 
+const today = moment();
 export const PlannedRecipeContext =
   React.createContext<PlannedRecipeContextType>(
     initialPlannedRecipeContextState
@@ -14,6 +16,10 @@ const PlannedRecipeProvider: React.FC<PropsWithChildren> = ({ children }) => {
   const [plannedRecipes, setPlannedRecipes] = useState<
     PlannedRecipesResponse[]
   >([]);
+
+  useEffect(() => {
+    loadPlannedRecipes(today.week().toString())
+  }, [])
 
   const loadPlannedRecipes = (week: string): void => {
     getPlannedRecipePage(week)

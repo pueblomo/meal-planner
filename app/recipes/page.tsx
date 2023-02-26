@@ -1,19 +1,15 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import React, { type FC, useContext, useEffect } from "react";
+import React, { type FC, useContext } from "react";
 import RecipeHeader from "./header";
 import Searchbar from "../../components/searchbar";
 import { RecipeContext } from "../../contexts/RecipeContext";
 import Recipe from "../../components/Recipe";
 
 const RecipesOverview: FC = () => {
-  const { recipes, loadRecipes } = useContext(RecipeContext);
+  const { recipes } = useContext(RecipeContext);
   const router = useRouter();
-
-  useEffect(() => {
-    loadRecipes();
-  }, []);
 
   return (
     <section className="h-screen">
