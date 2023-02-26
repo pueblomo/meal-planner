@@ -1,26 +1,19 @@
 "use client";
 
-import React, { type FC, useContext, useEffect, useState } from "react";
+import React, { type FC, useState } from "react";
 import Accordion from "../../components/accordion/accordion";
 import PlannedDay from "../../components/plannedDay/PlannedDay";
 import { Days } from "../../models/enums/Days";
-import { PlannedRecipeContext } from "../../contexts/PlannedRecipeContext";
 import moment from "moment";
 import PlannedRecipeHeader from "./header";
 
 const today = moment();
 const RecipesOverview: FC = () => {
-  const { loadPlannedRecipes } = useContext(PlannedRecipeContext);
-  const [week, setWeek] = useState<string>("");
-
-  useEffect(() => {
-    setWeek(todayWeek());
-    loadPlannedRecipes(todayWeek());
-  }, []);
-
   const todayWeek = (): string => {
     return today.week().toString();
   };
+
+  const [week, setWeek] = useState<string>(todayWeek());
 
   const switchWeek = (): void => {
     setWeek(week === todayWeek() ? (today.week() + 1).toString() : todayWeek());

@@ -1,5 +1,6 @@
 import React, { type ReactElement } from "react";
 import Tab from "../../components/tab";
+import ShoppingListProvider from "../../contexts/ShoppingListContext";
 
 export default function RecipeLayout({
                                        children
@@ -8,8 +9,8 @@ export default function RecipeLayout({
 }): ReactElement {
   return (
     <section className="overflow-hidden h-screen">
-      {children}
-      <Tab active={1} />
+      <ShoppingListProvider>{children}</ShoppingListProvider>
+      <Tab active={2} />
     </section>
   );
 }
